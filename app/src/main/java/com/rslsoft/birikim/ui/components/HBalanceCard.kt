@@ -25,11 +25,13 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rslsoft.birikim.R
 import com.rslsoft.birikim.domain.CurrencyUtils
 import com.rslsoft.birikim.ui.theme.BirikimTheme
 
@@ -46,6 +48,12 @@ fun HBalanceCard(
     onUpdateClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val hiddenDesc = stringResource(R.string.balance_hidden)
+    val balanceFormatDesc = stringResource(R.string.current_balance)
+    val showBalanceDesc = stringResource(R.string.show_balance)
+    val hideBalanceDesc = stringResource(R.string.hide_balance)
+    val updateDesc = stringResource(R.string.btn_update_balance)
+
     var isPressed by remember { mutableStateOf(false) }
     val scale by animateFloatAsState(
         targetValue = if (isPressed) 0.97f else 1f,
@@ -86,7 +94,7 @@ fun HBalanceCard(
             }
             .padding(BirikimTheme.dimens.cardInnerPadding)
             .semantics {
-                contentDescription = if (isHidden) "Bakiye gizli" else "Bakiye: ${CurrencyUtils.formatCurrency(balanceKurus)}"
+                contentDescription = if (isHidden) hiddenDesc else "$balanceFormatDesc: ${CurrencyUtils.formatCurrency(balanceKurus)}"
             }
     ) {
         Column {
@@ -96,7 +104,7 @@ fun HBalanceCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Mevcut bakiye",
+                    text = stringResource(R.string.current_balance),
                     style = BirikimTheme.typography.body,
                     color = Color.White.copy(alpha = 0.8f)
                 )
@@ -107,7 +115,7 @@ fun HBalanceCard(
                 ) {
                     Icon(
                         imageVector = if (isHidden) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
-                        contentDescription = if (isHidden) "Bakiyeyi göster" else "Bakiyeyi gizle",
+                        contentDescription = if (isHidden) showBalanceDesc else hideBalanceDesc,
                         tint = Color.White.copy(alpha = 0.8f),
                         modifier = Modifier.size(22.dp)
                     )
@@ -136,11 +144,11 @@ fun HBalanceCard(
                 horizontalArrangement = Arrangement.End
             ) {
                 HPillButton(
-                    text = "Güncelle",
+                    text = stringResource(R.string.btn_update),
                     onClick = onUpdateClick,
                     backgroundColor = Color.White.copy(alpha = 0.2f),
                     textColor = Color.White,
-                    contentDescription = "Bakiyeyi güncelle"
+                    contentDescription = updateDesc
                 )
             }
         }

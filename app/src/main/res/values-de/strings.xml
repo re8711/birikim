@@ -1,0 +1,192 @@
+<resources>
+    <string name="app_name">Birikim</string>
+    <string name="greeting_hello">Hallo</string>
+    <string name="greeting_app_name">Birikim</string>
+    <string name="settings_title">Einstellungen</string>
+
+    <!-- Balance Card -->
+    <string name="current_balance">Aktueller Kontostand</string>
+    <string name="balance_hidden">Kontostand ausgeblendet</string>
+    <string name="show_balance">Kontostand anzeigen</string>
+    <string name="hide_balance">Kontostand ausblenden</string>
+    <string name="btn_update">Aktualisieren</string>
+    <string name="btn_update_balance">Kontostand aktualisieren</string>
+    <string name="amount_label">Betrag (₺)</string>
+    <string name="btn_set_balance">Kontostand festlegen</string>
+    <string name="btn_add_amount">Hinzufügen</string>
+
+    <!-- Period Selector -->
+    <string name="period_monthly">Monatlich</string>
+    <string name="period_yearly">Jährlich</string>
+    <string name="period_selector_desc">Zeitraumauswahl</string>
+
+    <!-- Summary Card -->
+    <string name="monthly_summary">Monatliche Übersicht</string>
+    <string name="yearly_summary">Jährliche Übersicht</string>
+    <string name="total_income">Gesamteinnahmen</string>
+    <string name="total_expense">Gesamtausgaben</string>
+    <string name="end_of_period_balance">Endkontostand am Periodenende</string>
+    <string name="deficit_warning">In diesem Zeitraum haben Sie ein Defizit</string>
+    <string name="spending_ratio">Ausgabenquote (%1$d%%)</string>
+
+    <!-- Category Chart -->
+    <string name="category_distribution">Ausgaben nach Kategorie</string>
+    <string name="category_other">Sonstiges</string>
+
+    <!-- Upcoming Payments -->
+    <string name="upcoming_payments_title">Anstehende Zahlungen (Nächste 7 Tage)</string>
+    <string name="btn_paid">Bezahlt</string>
+    <string name="marked_paid_desc">%1$s als bezahlt markiert</string>
+
+    <!-- Recent Transactions -->
+    <string name="recent_transactions_title">Letzte Transaktionen</string>
+    <string name="see_all">Alle anzeigen</string>
+    <string name="no_transactions_yet">Noch keine Transaktionen. Fügen Sie Ihren ersten Eintrag über den Rechner hinzu.</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Startseite</string>
+    <string name="nav_calculator">Rechner</string>
+    <string name="nav_history">Verlauf</string>
+    <string name="nav_goals">Ziele</string>
+
+    <!-- Calculator -->
+    <string name="calc_mode_sub">Abo</string>
+    <string name="calc_mode_inst">Ratenzahlung</string>
+    <string name="calc_mode_comp">Sparen</string>
+    <string name="calc_mode_norm">Standard</string>
+    <string name="sub_title">Abonnement / Rechnung</string>
+    <string name="sub_freq_weekly">Wöchentlich</string>
+    <string name="sub_freq_monthly">Monatlich</string>
+    <string name="sub_freq_quarterly">Alle 3 Monate</string>
+    <string name="sub_freq_semi_annual">Alle 6 Monate</string>
+    <string name="sub_freq_yearly">Jährlich</string>
+    <string name="annual_increase">Jährliche Erhöhung (%)</string>
+    <string name="monthly_cost">Monatliche Kosten</string>
+    <string name="quarterly_total">3-Monate-Gesamt</string>
+    <string name="semi_annual_total">6-Monate-Gesamt</string>
+    <string name="yearly_total">1-Jahr-Gesamt</string>
+    <string name="five_year_total">5-Jahre-Gesamt</string>
+    <string name="save_as_expense">Als Ausgabe speichern</string>
+    <string name="save_as_income">Als Einnahme speichern</string>
+    <string name="inst_title">Ratenrechner</string>
+    <string name="total_debt">Gesamtschuldenbetrag (₺)</string>
+    <string name="inst_count">Anzahl der Raten</string>
+    <string name="monthly_interest">Monatlicher Zinssatz (%)</string>
+    <string name="monthly_installment">Monatliche Rate</string>
+    <string name="total_payment">Gesamtzahlung</string>
+    <string name="total_interest">Gesamtzinsen</string>
+    <string name="comp_title">Zins- &amp; Sparrechner</string>
+    <string name="monthly_deposit">Monatlicher Sparbetrag (₺)</string>
+    <string name="annual_interest">Jährlicher Zinssatz (%)</string>
+    <string name="duration_months">Laufzeit (Monate)</string>
+    <string name="total_deposited">Einbezahlter Gesamtbetrag</string>
+    <string name="total_interest_earned">Erwirtschaftete Zinsen</string>
+    <string name="amount_at_end">Endguthaben</string>
+    <string name="normal_calc_title">Standard-Taschenrechner</string>
+    <string name="calc_history_title">Rechner-Verlauf</string>
+    <string name="clear_history">Löschen</string>
+    <string name="save_sheet_expense_title">Als Ausgabe speichern</string>
+    <string name="save_sheet_income_title">Als Einnahme speichern</string>
+    <string name="title_label_hint">Titel (z. B. Netflix, Miete)</string>
+    <string name="select_category">Kategorie auswählen</string>
+    <string name="amount_display">Betrag: %1$s</string>
+    <string name="btn_save">Speichern</string>
+    <string name="default_title_sub">Abonnement</string>
+    <string name="default_title_inc">Einnahme</string>
+    <string name="default_title_inst">Ratenzahlung</string>
+
+    <!-- History -->
+    <string name="history_title">Transaktionsverlauf</string>
+    <string name="search_hint">Transaktion oder Kategorie suchen&#8230;</string>
+    <string name="filter_all">Alle</string>
+    <string name="filter_income">Einnahmen</string>
+    <string name="filter_expense">Ausgaben</string>
+    <string name="date_today">Heute</string>
+    <string name="date_yesterday">Gestern</string>
+    <string name="btn_new_transaction">Neue Transaktion</string>
+    <string name="edit_transaction">Transaktion bearbeiten</string>
+    <string name="type_income">Einnahme</string>
+    <string name="type_expense">Ausgabe</string>
+    <string name="title_label">Titel</string>
+    <string name="amount_label_simple">Betrag (₺)</string>
+    <string name="category_label">Kategorie</string>
+    <string name="btn_add_category">+ Neue Kategorie</string>
+    <string name="recurrence_label">Wiederholung</string>
+    <string name="rec_once">Einmalig</string>
+    <string name="rec_weekly">Wöchentlich</string>
+    <string name="rec_monthly">Monatlich</string>
+    <string name="rec_quarterly">Alle 3 Monate</string>
+    <string name="rec_semi_annually">Alle 6 Monate</string>
+    <string name="rec_yearly">Jährlich</string>
+    <string name="new_category_dialog_title">Neue Kategorie hinzufügen</string>
+    <string name="category_name_label">Kategoriename</string>
+    <string name="btn_cancel">Abbrechen</string>
+    <string name="btn_add">Hinzufügen</string>
+    <string name="btn_update_action">Aktualisieren</string>
+
+    <!-- Goals -->
+    <string name="goals_title">Sparziele</string>
+    <string name="btn_new_goal">Neues Ziel</string>
+    <string name="no_goals_yet">Noch keine Sparziele. Erstellen Sie Ihr erstes Ziel für Urlaub, Auto oder Notfallfonds!</string>
+    <string name="goal_target">Ziel: %1$s</string>
+    <string name="goal_saved">Gespart: %1$s</string>
+    <string name="goal_remaining">Verbleibend: %1$s</string>
+    <string name="goal_monthly_recommendation">Um dieses Ziel zu erreichen, sparen Sie %1$s pro Monat. (Schätzung: %2$d Monate)</string>
+    <string name="goal_achieved">Herzlichen Glückwunsch! Sie haben dieses Ziel erreicht 🎉</string>
+    <string name="add_deposit">+ Einzahlung</string>
+    <string name="deposit_dialog_title">Einzahlung hinzufügen</string>
+    <string name="deduct_from_balance_question">Vom aktuellen Kontostand abziehen?</string>
+    <string name="new_goal_dialog_title">Neues Sparziel erstellen</string>
+    <string name="goal_title_label">Zielname (z. B. Auto, Urlaub)</string>
+    <string name="target_amount_label">Zielbetrag (₺)</string>
+    <string name="btn_create">Ziel erstellen</string>
+    <string name="amount_to_add">Einzuzahlender Betrag (₺)</string>
+
+    <!-- Settings -->
+    <string name="settings_screen_title">Einstellungen</string>
+    <string name="theme_mode_title">Erscheinungsbild</string>
+    <string name="theme_system">Automatisch</string>
+    <string name="theme_light">Hell</string>
+    <string name="theme_dark">Dunkel</string>
+    <string name="sec_security">Sicherheit</string>
+    <string name="hide_balance_default">Kontostand standardmäßig ausblenden</string>
+    <string name="hide_balance_default_desc">Kontostand beim App-Start verbergen</string>
+    <string name="biometric_lock">Biometrie- / Passwortsperre</string>
+    <string name="biometric_desc">Fingerabdruck / Gesichtserkennung beim Start anfordern</string>
+    <string name="sec_notifications">Benachrichtigungen</string>
+    <string name="payment_reminders">Zahlungserinnerungen</string>
+    <string name="payment_reminders_desc">Tägliche Erinnerungen an anstehende Rechnungen</string>
+    <string name="sec_language">App-Sprache</string>
+    <string name="lang_system">System</string>
+    <string name="lang_tr">Türkçe</string>
+    <string name="lang_en">English</string>
+    <string name="lang_de">Deutsch</string>
+    <string name="sec_data_mgmt">Datenverwaltung</string>
+    <string name="export_csv">Daten exportieren (CSV)</string>
+    <string name="export_csv_desc">Transaktionsverlauf als CSV-Datei herunterladen</string>
+    <string name="clear_all_data">Alle Daten zurücksetzen</string>
+    <string name="clear_data_desc">Löscht Transaktionen, Ziele und Einstellungen</string>
+    <string name="clear_data_confirm_title">Alle Daten zurücksetzen?</string>
+    <string name="clear_data_confirm_msg">Dies kann nicht rückgängig gemacht werden. Alle Einträge und der Kontostand werden gelöscht.</string>
+    <string name="btn_delete_all">Alles löschen</string>
+
+    <!-- Biometric Lock -->
+    <string name="biometric_prompt_title">Birikim entsperren</string>
+    <string name="biometric_prompt_subtitle">Bestätigen Sie Ihre Identität, um fortzufahren</string>
+    <string name="app_locked">Birikim ist gesperrt</string>
+    <string name="verify_identity">Bestätigen Sie Ihre Identität, um fortzufahren</string>
+    <string name="btn_unlock">Entsperren</string>
+
+    <!-- Categories -->
+    <string name="cat_salary">Gehalt</string>
+    <string name="cat_rent">Miete</string>
+    <string name="cat_subscription">Abonnement</string>
+    <string name="cat_groceries">Lebensmittel</string>
+    <string name="cat_bills">Rechnungen</string>
+    <string name="cat_entertainment">Unterhaltung</string>
+    <string name="cat_transport">Transport</string>
+    <string name="cat_health">Gesundheit</string>
+    <string name="cat_education">Bildung</string>
+    <string name="cat_side_income">Nebeneinkommen</string>
+    <string name="cat_other">Sonstiges</string>
+</resources>

@@ -1,0 +1,192 @@
+<resources>
+    <string name="app_name">Birikim</string>
+    <string name="greeting_hello">Merhaba</string>
+    <string name="greeting_app_name">Birikim</string>
+    <string name="settings_title">Ayarlar</string>
+
+    <!-- Balance Card -->
+    <string name="current_balance">Mevcut bakiye</string>
+    <string name="balance_hidden">Bakiye gizli</string>
+    <string name="show_balance">Bakiyeyi göster</string>
+    <string name="hide_balance">Bakiyeyi gizle</string>
+    <string name="btn_update">Güncelle</string>
+    <string name="btn_update_balance">Bakiyeyi Güncelle</string>
+    <string name="amount_label">Tutar (₺)</string>
+    <string name="btn_set_balance">Bakiyeyi Ayarla</string>
+    <string name="btn_add_amount">Ekle</string>
+
+    <!-- Period Selector -->
+    <string name="period_monthly">Aylık</string>
+    <string name="period_yearly">Yıllık</string>
+    <string name="period_selector_desc">Dönem seçici</string>
+
+    <!-- Summary Card -->
+    <string name="monthly_summary">Aylık Özet</string>
+    <string name="yearly_summary">Yıllık Özet</string>
+    <string name="total_income">Toplam Gelir</string>
+    <string name="total_expense">Toplam Gider</string>
+    <string name="end_of_period_balance">Dönem sonunda kalacak para</string>
+    <string name="deficit_warning">Bu dönemde açık veriyorsun</string>
+    <string name="spending_ratio">Harcama Oranı (%%%1$d)</string>
+
+    <!-- Category Chart -->
+    <string name="category_distribution">Kategori Dağılımı</string>
+    <string name="category_other">Diğer</string>
+
+    <!-- Upcoming Payments -->
+    <string name="upcoming_payments_title">Yaklaşan Ödemeler (Önümüzdeki 7 Gün)</string>
+    <string name="btn_paid">Ödendi</string>
+    <string name="marked_paid_desc">%1$s ödendi olarak işaretle</string>
+
+    <!-- Recent Transactions -->
+    <string name="recent_transactions_title">Son İşlemler</string>
+    <string name="see_all">Tümünü gör</string>
+    <string name="no_transactions_yet">Henüz işlem yok. Hesap makinesinden ilk kaydını ekle.</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Ana Sayfa</string>
+    <string name="nav_calculator">Hesap</string>
+    <string name="nav_history">Geçmiş</string>
+    <string name="nav_goals">Hedefler</string>
+
+    <!-- Calculator -->
+    <string name="calc_mode_sub">Abonelik</string>
+    <string name="calc_mode_inst">Taksit</string>
+    <string name="calc_mode_comp">Birikim</string>
+    <string name="calc_mode_norm">Standart</string>
+    <string name="sub_title">Abonelik / Fatura</string>
+    <string name="sub_freq_weekly">Haftalık</string>
+    <string name="sub_freq_monthly">Aylık</string>
+    <string name="sub_freq_quarterly">3 Aylık</string>
+    <string name="sub_freq_semi_annual">6 Aylık</string>
+    <string name="sub_freq_yearly">Yıllık</string>
+    <string name="annual_increase">Yıllık Zam Oranı (%)</string>
+    <string name="monthly_cost">Aylık Maliyet</string>
+    <string name="quarterly_total">3 Aylık Toplam</string>
+    <string name="semi_annual_total">6 Aylık Toplam</string>
+    <string name="yearly_total">1 Yıllık Toplam</string>
+    <string name="five_year_total">5 Yıllık Toplam</string>
+    <string name="save_as_expense">Gider Kaydet</string>
+    <string name="save_as_income">Gelir Kaydet</string>
+    <string name="inst_title">Taksit Hesaplama</string>
+    <string name="total_debt">Toplam Borç Tutarı (₺)</string>
+    <string name="inst_count">Taksit Sayısı</string>
+    <string name="monthly_interest">Aylık Faiz (%)</string>
+    <string name="monthly_installment">Aylık Taksit</string>
+    <string name="total_payment">Toplam Ödeme</string>
+    <string name="total_interest">Toplam Faiz</string>
+    <string name="comp_title">Faiz / Birikim Hesaplama</string>
+    <string name="monthly_deposit">Aylık Biriktirilen Tutar (₺)</string>
+    <string name="annual_interest">Yıllık Faiz Oranı (%)</string>
+    <string name="duration_months">Süre (Ay)</string>
+    <string name="total_deposited">Toplam Yatırılan</string>
+    <string name="total_interest_earned">Kazanılan Faiz</string>
+    <string name="amount_at_end">Vade Sonu Toplam</string>
+    <string name="normal_calc_title">Standart Hesap Makinesi</string>
+    <string name="calc_history_title">Hesaplama Geçmişi</string>
+    <string name="clear_history">Temizle</string>
+    <string name="save_sheet_expense_title">Gider Olarak Kaydet</string>
+    <string name="save_sheet_income_title">Gelir Olarak Kaydet</string>
+    <string name="title_label_hint">Başlık (ör. Netflix, Kira)</string>
+    <string name="select_category">Kategori Seçin</string>
+    <string name="amount_display">Tutar: %1$s</string>
+    <string name="btn_save">Kaydet</string>
+    <string name="default_title_sub">Abonelik</string>
+    <string name="default_title_inc">Gelir</string>
+    <string name="default_title_inst">Taksit Ödemesi</string>
+
+    <!-- History -->
+    <string name="history_title">İşlem Geçmişi</string>
+    <string name="search_hint">İşlem veya kategori ara…</string>
+    <string name="filter_all">Tümü</string>
+    <string name="filter_income">Gelirler</string>
+    <string name="filter_expense">Giderler</string>
+    <string name="date_today">Bugün</string>
+    <string name="date_yesterday">Dün</string>
+    <string name="btn_new_transaction">Yeni İşlem Ekle</string>
+    <string name="edit_transaction">İşlemi Düzenle</string>
+    <string name="type_income">Gelir</string>
+    <string name="type_expense">Gider</string>
+    <string name="title_label">Başlık</string>
+    <string name="amount_label_simple">Tutar (₺)</string>
+    <string name="category_label">Kategori</string>
+    <string name="btn_add_category">+ Yeni Kategori Ekle</string>
+    <string name="recurrence_label">Tekrarlama Sıklığı</string>
+    <string name="rec_once">Tek Seferlik</string>
+    <string name="rec_weekly">Haftalık</string>
+    <string name="rec_monthly">Aylık</string>
+    <string name="rec_quarterly">3 Aylık</string>
+    <string name="rec_semi_annually">6 Aylık</string>
+    <string name="rec_yearly">Yıllık</string>
+    <string name="new_category_dialog_title">Yeni Kategori Ekle</string>
+    <string name="category_name_label">Kategori Adı</string>
+    <string name="btn_cancel">İptal</string>
+    <string name="btn_add">Ekle</string>
+    <string name="btn_update_action">Güncelle</string>
+
+    <!-- Goals -->
+    <string name="goals_title">Birikim Hedefleri</string>
+    <string name="btn_new_goal">Yeni Hedef Ekle</string>
+    <string name="no_goals_yet">Henüz birikim hedefi eklemedin. Tatil, araba veya acil durum fonu için ilk hedefini ekle!</string>
+    <string name="goal_target">Hedef: %1$s</string>
+    <string name="goal_saved">Biriken: %1$s</string>
+    <string name="goal_remaining">Kalan: %1$s</string>
+    <string name="goal_monthly_recommendation">Bu hedefe ulaşmak için ayda %1$s biriktirmelisin. (Tahmini %2$d ay)</string>
+    <string name="goal_achieved">Tebrikler! Bu hedefe ulaştın 🎉</string>
+    <string name="add_deposit">+ Birikim Ekle</string>
+    <string name="deposit_dialog_title">Birikim Ekle</string>
+    <string name="deduct_from_balance_question">Mevcut bakiyeden düşülsün mü?</string>
+    <string name="new_goal_dialog_title">Yeni Birikim Hedefi</string>
+    <string name="goal_title_label">Hedef Adı (ör. Tatil, Araba)</string>
+    <string name="target_amount_label">Hedef Tutar (₺)</string>
+    <string name="btn_create">Hedef Oluştur</string>
+    <string name="amount_to_add">Eklenecek Tutar (₺)</string>
+
+    <!-- Settings -->
+    <string name="settings_screen_title">Ayarlar</string>
+    <string name="theme_mode_title">Tema Modu</string>
+    <string name="theme_system">Otomatik</string>
+    <string name="theme_light">Açık</string>
+    <string name="theme_dark">Koyu</string>
+    <string name="sec_security">Güvenlik</string>
+    <string name="hide_balance_default">Bakiyeyi Varsayılan Gizle</string>
+    <string name="hide_balance_default_desc">Uygulama açılışında bakiye gizli olsun</string>
+    <string name="biometric_lock">Biyometrik / Parola Kilidi</string>
+    <string name="biometric_desc">Açılışta parmak izi / yüz doğrulama iste</string>
+    <string name="sec_notifications">Bildirimler</string>
+    <string name="payment_reminders">Hatırlatıcı Bildirimleri</string>
+    <string name="payment_reminders_desc">Yaklaşan fatura ve abonelik bildirimi al</string>
+    <string name="sec_language">Uygulama Dili / Language</string>
+    <string name="lang_system">Sistem</string>
+    <string name="lang_tr">Türkçe</string>
+    <string name="lang_en">English</string>
+    <string name="lang_de">Deutsch</string>
+    <string name="sec_data_mgmt">Veri Yönetimi</string>
+    <string name="export_csv">Verileri Dışa Aktar (CSV)</string>
+    <string name="export_csv_desc">İşlem geçmişini CSV dosyası olarak indir</string>
+    <string name="clear_all_data">Tüm Verileri Sil</string>
+    <string name="clear_data_desc">İşlemler, hedefler ve ayarlar sıfırlanır</string>
+    <string name="clear_data_confirm_title">Tüm Veriler Silinsin mi?</string>
+    <string name="clear_data_confirm_msg">Bu işlem geri alınamaz. Tüm kayıtların ve bakiyen silinecek.</string>
+    <string name="btn_delete_all">Tümünü Sil</string>
+
+    <!-- Biometric Lock -->
+    <string name="biometric_prompt_title">Birikim\'e Giriş</string>
+    <string name="biometric_prompt_subtitle">Kimliğinizi doğrulayın</string>
+    <string name="app_locked">Birikim kilitli</string>
+    <string name="verify_identity">Devam etmek için kimliğinizi doğrulayın</string>
+    <string name="btn_unlock">Kilidi Aç</string>
+
+    <!-- Categories -->
+    <string name="cat_salary">Maaş</string>
+    <string name="cat_rent">Kira</string>
+    <string name="cat_subscription">Abonelik</string>
+    <string name="cat_groceries">Market</string>
+    <string name="cat_bills">Fatura</string>
+    <string name="cat_entertainment">Eğlence</string>
+    <string name="cat_transport">Ulaşım</string>
+    <string name="cat_health">Sağlık</string>
+    <string name="cat_education">Eğitim</string>
+    <string name="cat_side_income">Ek Gelir</string>
+    <string name="cat_other">Diğer</string>
+</resources>

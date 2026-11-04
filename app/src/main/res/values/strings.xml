@@ -1,3 +1,192 @@
 <resources>
     <string name="app_name">Birikim</string>
+    <string name="greeting_hello">Hello</string>
+    <string name="greeting_app_name">Birikim</string>
+    <string name="settings_title">Settings</string>
+
+    <!-- Balance Card -->
+    <string name="current_balance">Current balance</string>
+    <string name="balance_hidden">Balance hidden</string>
+    <string name="show_balance">Show balance</string>
+    <string name="hide_balance">Hide balance</string>
+    <string name="btn_update">Update</string>
+    <string name="btn_update_balance">Update Balance</string>
+    <string name="amount_label">Amount (₺)</string>
+    <string name="btn_set_balance">Set Balance</string>
+    <string name="btn_add_amount">Add</string>
+
+    <!-- Period Selector -->
+    <string name="period_monthly">Monthly</string>
+    <string name="period_yearly">Yearly</string>
+    <string name="period_selector_desc">Period selector</string>
+
+    <!-- Summary Card -->
+    <string name="monthly_summary">Monthly Summary</string>
+    <string name="yearly_summary">Yearly Summary</string>
+    <string name="total_income">Total Income</string>
+    <string name="total_expense">Total Expense</string>
+    <string name="end_of_period_balance">Balance at end of period</string>
+    <string name="deficit_warning">You have a deficit this period</string>
+    <string name="spending_ratio">Spending Rate (%1$d%%)</string>
+
+    <!-- Category Chart -->
+    <string name="category_distribution">Category Breakdown</string>
+    <string name="category_other">Other</string>
+
+    <!-- Upcoming Payments -->
+    <string name="upcoming_payments_title">Upcoming Payments (Next 7 Days)</string>
+    <string name="btn_paid">Paid</string>
+    <string name="marked_paid_desc">%1$s marked as paid</string>
+
+    <!-- Recent Transactions -->
+    <string name="recent_transactions_title">Recent Transactions</string>
+    <string name="see_all">See all</string>
+    <string name="no_transactions_yet">No transactions yet. Add your first record from the calculator.</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_calculator">Calculator</string>
+    <string name="nav_history">History</string>
+    <string name="nav_goals">Goals</string>
+
+    <!-- Calculator -->
+    <string name="calc_mode_sub">Subscription</string>
+    <string name="calc_mode_inst">Installment</string>
+    <string name="calc_mode_comp">Savings</string>
+    <string name="calc_mode_norm">Standard</string>
+    <string name="sub_title">Subscription / Bill</string>
+    <string name="sub_freq_weekly">Weekly</string>
+    <string name="sub_freq_monthly">Monthly</string>
+    <string name="sub_freq_quarterly">Quarterly</string>
+    <string name="sub_freq_semi_annual">Semi-Annually</string>
+    <string name="sub_freq_yearly">Yearly</string>
+    <string name="annual_increase">Annual Increase (%)</string>
+    <string name="monthly_cost">Monthly Cost</string>
+    <string name="quarterly_total">3-Month Total</string>
+    <string name="semi_annual_total">6-Month Total</string>
+    <string name="yearly_total">1-Year Total</string>
+    <string name="five_year_total">5-Year Total</string>
+    <string name="save_as_expense">Save Expense</string>
+    <string name="save_as_income">Save Income</string>
+    <string name="inst_title">Installment Calculation</string>
+    <string name="total_debt">Total Debt Amount (₺)</string>
+    <string name="inst_count">Installments</string>
+    <string name="monthly_interest">Monthly Interest (%)</string>
+    <string name="monthly_installment">Monthly Installment</string>
+    <string name="total_payment">Total Payment</string>
+    <string name="total_interest">Total Interest</string>
+    <string name="comp_title">Interest / Savings Calculation</string>
+    <string name="monthly_deposit">Monthly Deposit (₺)</string>
+    <string name="annual_interest">Annual Interest Rate (%)</string>
+    <string name="duration_months">Duration (Months)</string>
+    <string name="total_deposited">Total Deposited</string>
+    <string name="total_interest_earned">Total Interest Earned</string>
+    <string name="amount_at_end">Amount at End of Term</string>
+    <string name="normal_calc_title">Standard Calculator</string>
+    <string name="calc_history_title">Calculation History</string>
+    <string name="clear_history">Clear</string>
+    <string name="save_sheet_expense_title">Save as Expense</string>
+    <string name="save_sheet_income_title">Save as Income</string>
+    <string name="title_label_hint">Title (e.g. Netflix, Rent)</string>
+    <string name="select_category">Select Category</string>
+    <string name="amount_display">Amount: %1$s</string>
+    <string name="btn_save">Save</string>
+    <string name="default_title_sub">Subscription</string>
+    <string name="default_title_inc">Income</string>
+    <string name="default_title_inst">Installment Payment</string>
+
+    <!-- History -->
+    <string name="history_title">Transaction History</string>
+    <string name="search_hint">Search transaction or category&#8230;</string>
+    <string name="filter_all">All</string>
+    <string name="filter_income">Incomes</string>
+    <string name="filter_expense">Expenses</string>
+    <string name="date_today">Today</string>
+    <string name="date_yesterday">Yesterday</string>
+    <string name="btn_new_transaction">New Transaction</string>
+    <string name="edit_transaction">Edit Transaction</string>
+    <string name="type_income">Income</string>
+    <string name="type_expense">Expense</string>
+    <string name="title_label">Title</string>
+    <string name="amount_label_simple">Amount (₺)</string>
+    <string name="category_label">Category</string>
+    <string name="btn_add_category">+ Add Category</string>
+    <string name="recurrence_label">Recurrence</string>
+    <string name="rec_once">Once</string>
+    <string name="rec_weekly">Weekly</string>
+    <string name="rec_monthly">Monthly</string>
+    <string name="rec_quarterly">Quarterly</string>
+    <string name="rec_semi_annually">Semi-Annually</string>
+    <string name="rec_yearly">Yearly</string>
+    <string name="new_category_dialog_title">Add New Category</string>
+    <string name="category_name_label">Category Name</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_add">Add</string>
+    <string name="btn_update_action">Update</string>
+
+    <!-- Goals -->
+    <string name="goals_title">Savings Goals</string>
+    <string name="btn_new_goal">New Goal</string>
+    <string name="no_goals_yet">No savings goals yet. Create your first goal for a vacation, car, or emergency fund!</string>
+    <string name="goal_target">Target: %1$s</string>
+    <string name="goal_saved">Saved: %1$s</string>
+    <string name="goal_remaining">Remaining: %1$s</string>
+    <string name="goal_monthly_recommendation">To reach this goal, save %1$s per month. (Estimated %2$d months)</string>
+    <string name="goal_achieved">Congratulations! You reached this goal 🎉</string>
+    <string name="add_deposit">+ Add Savings</string>
+    <string name="deposit_dialog_title">Add Savings</string>
+    <string name="deduct_from_balance_question">Deduct from current balance?</string>
+    <string name="new_goal_dialog_title">Create New Goal</string>
+    <string name="goal_title_label">Goal Title (e.g. Car, Vacation)</string>
+    <string name="target_amount_label">Target Amount (₺)</string>
+    <string name="btn_create">Create Goal</string>
+    <string name="amount_to_add">Amount to Add (₺)</string>
+
+    <!-- Settings -->
+    <string name="settings_screen_title">Settings</string>
+    <string name="theme_mode_title">Theme Mode</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="sec_security">Security</string>
+    <string name="hide_balance_default">Hide Balance by Default</string>
+    <string name="hide_balance_default_desc">Keep balance hidden on app launch</string>
+    <string name="biometric_lock">Biometric / Password Lock</string>
+    <string name="biometric_desc">Require fingerprint / face unlock on launch</string>
+    <string name="sec_notifications">Notifications</string>
+    <string name="payment_reminders">Payment Reminders</string>
+    <string name="payment_reminders_desc">Daily upcoming bill alerts</string>
+    <string name="sec_language">App Language</string>
+    <string name="lang_system">System</string>
+    <string name="lang_tr">Türkçe</string>
+    <string name="lang_en">English</string>
+    <string name="lang_de">Deutsch</string>
+    <string name="sec_data_mgmt">Data Management</string>
+    <string name="export_csv">Export Data (CSV)</string>
+    <string name="export_csv_desc">Download transaction history as CSV</string>
+    <string name="clear_all_data">Reset All Data</string>
+    <string name="clear_data_desc">Resets transactions, goals, and settings</string>
+    <string name="clear_data_confirm_title">Reset All Data?</string>
+    <string name="clear_data_confirm_msg">This action cannot be undone. All your records and balance will be deleted.</string>
+    <string name="btn_delete_all">Delete All</string>
+
+    <!-- Biometric Lock -->
+    <string name="biometric_prompt_title">Unlock Birikim</string>
+    <string name="biometric_prompt_subtitle">Verify your identity to proceed</string>
+    <string name="app_locked">Birikim is locked</string>
+    <string name="verify_identity">Verify your identity to continue</string>
+    <string name="btn_unlock">Unlock</string>
+
+    <!-- Categories -->
+    <string name="cat_salary">Salary</string>
+    <string name="cat_rent">Rent</string>
+    <string name="cat_subscription">Subscription</string>
+    <string name="cat_groceries">Groceries</string>
+    <string name="cat_bills">Bills</string>
+    <string name="cat_entertainment">Entertainment</string>
+    <string name="cat_transport">Transportation</string>
+    <string name="cat_health">Health</string>
+    <string name="cat_education">Education</string>
+    <string name="cat_side_income">Side Income</string>
+    <string name="cat_other">Other</string>
 </resources>

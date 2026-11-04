@@ -1,13 +1,14 @@
 package com.rslsoft.birikim.ui.screens.settings
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rslsoft.birikim.data.local.PreferencesDataStore
 import com.rslsoft.birikim.data.repository.CalculationHistoryRepository
 import com.rslsoft.birikim.data.repository.GoalRepository
 import com.rslsoft.birikim.data.repository.TransactionRepository
-import com.rslsoft.birikim.domain.CurrencyUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
@@ -23,6 +24,7 @@ data class SettingsUiState(
     val hideBalanceDefault: Boolean = false,
     val biometricEnabled: Boolean = false,
     val notificationsEnabled: Boolean = true,
+    val appLanguage: String = "system",
     val exportMessage: String? = null
 )
 
@@ -44,17 +46,25 @@ class SettingsViewModel @Inject constructor(
                 preferencesDataStore.themeMode,
                 preferencesDataStore.hideBalance,
                 preferencesDataStore.biometricEnabled,
-                preferencesDataStore.notificationsEnabled
-            ) { theme, hide, bio, notif ->
+                preferencesDataStore.notificationsEnabled,
+                preferencesDataStore.appLanguage
+            ) { theme, hide, bio, notif, lang ->
                 SettingsUiState(
                     themeMode = theme,
                     hideBalanceDefault = hide,
                     biometricEnabled = bio,
-                    notificationsEnabled = notif
+                    notificationsEnabled = notif,
+                    appLanguage = lang
                 )
             }.collect { state ->
                 _uiState.value = state
             }
+        }
+    }
+
+    fun setAppLanguage(language: String) {
+        viewModelScope.launch {
+            preferencesDataStore.setAppLanguage(language)
         }
     }
 

@@ -24,9 +24,11 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import com.rslsoft.birikim.R
 import com.rslsoft.birikim.ui.navigation.Screen
 import com.rslsoft.birikim.ui.theme.BirikimTheme
 
@@ -45,10 +47,10 @@ fun HBottomBar(
     modifier: Modifier = Modifier
 ) {
     val items = listOf(
-        BottomBarItem(Screen.Home, "Ana Sayfa", Icons.Outlined.Home),
-        BottomBarItem(Screen.Calculator, "Hesap", Icons.Outlined.Calculate),
-        BottomBarItem(Screen.History, "Geçmiş", Icons.Outlined.History),
-        BottomBarItem(Screen.Goals, "Hedefler", Icons.Outlined.Flag)
+        BottomBarItem(Screen.Home, stringResource(R.string.nav_home), Icons.Outlined.Home),
+        BottomBarItem(Screen.Calculator, stringResource(R.string.nav_calculator), Icons.Outlined.Calculate),
+        BottomBarItem(Screen.History, stringResource(R.string.nav_history), Icons.Outlined.History),
+        BottomBarItem(Screen.Goals, stringResource(R.string.nav_goals), Icons.Outlined.Flag)
     )
 
     Box(

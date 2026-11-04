@@ -24,6 +24,7 @@ class PreferencesDataStore @Inject constructor(
         val BIOMETRIC_ENABLED = booleanPreferencesKey("biometric_enabled")
         val DEFAULT_PERIOD = stringPreferencesKey("default_period")
         val NOTIFICATIONS_ENABLED = booleanPreferencesKey("notifications_enabled")
+        val APP_LANGUAGE = stringPreferencesKey("app_language")
     }
 
     val balance: Flow<Long> = context.dataStore.data.map { prefs ->
@@ -48,6 +49,10 @@ class PreferencesDataStore @Inject constructor(
 
     val notificationsEnabled: Flow<Boolean> = context.dataStore.data.map { prefs ->
         prefs[PreferencesKeys.NOTIFICATIONS_ENABLED] ?: true
+    }
+
+    val appLanguage: Flow<String> = context.dataStore.data.map { prefs ->
+        prefs[PreferencesKeys.APP_LANGUAGE] ?: "system"
     }
 
     suspend fun setBalance(balance: Long) {
@@ -83,6 +88,12 @@ class PreferencesDataStore @Inject constructor(
     suspend fun setNotificationsEnabled(enabled: Boolean) {
         context.dataStore.edit { prefs ->
             prefs[PreferencesKeys.NOTIFICATIONS_ENABLED] = enabled
+        }
+    }
+
+    suspend fun setAppLanguage(language: String) {
+        context.dataStore.edit { prefs ->
+            prefs[PreferencesKeys.APP_LANGUAGE] = language
         }
     }
 

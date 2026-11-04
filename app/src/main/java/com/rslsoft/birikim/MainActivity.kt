@@ -1,19 +1,20 @@
 package com.rslsoft.birikim
 
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.SystemClock
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -38,6 +39,7 @@ import com.rslsoft.birikim.ui.screens.settings.SettingsViewModel
 import com.rslsoft.birikim.ui.theme.BirikimTheme
 import com.rslsoft.birikim.worker.ReminderWorker
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -59,6 +61,7 @@ class MainActivity : FragmentActivity() {
         setContent {
             val themeMode by preferencesDataStore.themeMode.collectAsState(initial = "SYSTEM")
             val biometricEnabled by preferencesDataStore.biometricEnabled.collectAsState(initial = false)
+            val appLanguage by preferencesDataStore.appLanguage.collectAsState(initial = "system")
 
             val darkTheme = when (themeMode) {
                 "LIGHT" -> false
@@ -79,22 +82,24 @@ class MainActivity : FragmentActivity() {
                 }
             }
 
-            BirikimTheme(darkTheme = darkTheme) {
-                if (isLocked) {
-                    BiometricLockScreen(
-                        onAuthenticate = {
-                            BiometricHelper.authenticate(
-                                activity = this@MainActivity,
-                                onSuccess = {
-                                    isLocked = false
-                                    BiometricHelper.setSecureFlag(this@MainActivity, false)
-                                },
-                                onError = { /* handle error */ }
-                            )
-                        }
-                    )
-                } else {
-                    MainAppContent()
+            LocalizedApp(language = appLanguage) {
+                BirikimTheme(darkTheme = darkTheme) {
+                    if (isLocked) {
+                        BiometricLockScreen(
+                            onAuthenticate = {
+                                BiometricHelper.authenticate(
+                                    activity = this@MainActivity,
+                                    onSuccess = {
+                                        isLocked = false
+                                        BiometricHelper.setSecureFlag(this@MainActivity, false)
+                                    },
+                                    onError = { /* handle error */ }
+                                )
+                            }
+                        )
+                    } else {
+                        MainAppContent()
+                    }
                 }
             }
         }
@@ -107,14 +112,61 @@ class MainActivity : FragmentActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Re-lock if backgrounded for more than 30 seconds
         if (lastBackgroundTime > 0) {
             val elapsed = SystemClock.elapsedRealtime() - lastBackgroundTime
             if (elapsed > 30_000) {
-                // Should re-check biometric setting and lock
+                // Re-check biometric setting if needed
             }
         }
     }
+}
+
+class LocalizedContext(
+    base: Context,
+    private val locale: Locale
+) : ContextWrapper(base) {
+    override fun getResources(): Resources {
+        val res = super.getResources()
+        val config = Configuration(res.configuration)
+        config.setLocale(locale)
+        config.setLayoutDirection(locale)
+        @Suppress("DEPRECATION")
+        res.updateConfiguration(config, res.displayMetrics)
+        return res
+    }
+}
+
+@Composable
+fun LocalizedApp(
+    language: String,
+    content: @Composable () -> Unit
+) {
+    val context = LocalContext.current
+    val locale = remember(language) {
+        when (language) {
+            "tr" -> Locale("tr", "TR")
+            "en" -> Locale("en", "US")
+            "de" -> Locale("de", "DE")
+            else -> Locale.getDefault()
+        }
+    }
+
+    val localizedContext = remember(context, locale) {
+        LocalizedContext(context, locale)
+    }
+
+    val configuration = remember(locale, context.resources.configuration) {
+        Configuration(context.resources.configuration).apply {
+            setLocale(locale)
+            setLayoutDirection(locale)
+        }
+    }
+
+    CompositionLocalProvider(
+        LocalContext provides localizedContext,
+        LocalConfiguration provides configuration,
+        content = content
+    )
 }
 
 @Composable

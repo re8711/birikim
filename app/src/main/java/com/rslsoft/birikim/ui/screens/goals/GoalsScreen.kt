@@ -5,15 +5,16 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rslsoft.birikim.R
 import com.rslsoft.birikim.domain.CurrencyUtils
 import com.rslsoft.birikim.ui.components.*
 import com.rslsoft.birikim.ui.theme.BirikimTheme
@@ -47,15 +48,15 @@ fun GoalsScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Birikim Hedefleri",
+                        text = stringResource(R.string.goals_title),
                         style = BirikimTheme.typography.titleLarge,
                         color = BirikimTheme.colors.textPrimary
                     )
 
                     HPillButton(
-                        text = "+ Yeni Hedef",
+                        text = stringResource(R.string.btn_new_goal),
                         onClick = { viewModel.openAddGoalSheet() },
-                        contentDescription = "Yeni hedef ekle"
+                        contentDescription = stringResource(R.string.btn_new_goal)
                     )
                 }
             }
@@ -65,7 +66,7 @@ fun GoalsScreen(
                 item {
                     HCard(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "Henüz birikim hedefi eklemedin. Tatil, araba veya acil durum fonu için ilk hedefini ekle!",
+                            text = stringResource(R.string.no_goals_yet),
                             style = BirikimTheme.typography.body,
                             color = BirikimTheme.colors.textTertiary,
                             modifier = Modifier.padding(vertical = 16.dp)
@@ -89,7 +90,7 @@ fun GoalsScreen(
                                 color = BirikimTheme.colors.textPrimary
                             )
                             Text(
-                                text = "Hedef: ${CurrencyUtils.formatCurrency(item.goal.targetAmount)}",
+                                text = stringResource(R.string.goal_target, CurrencyUtils.formatCurrency(item.goal.targetAmount)),
                                 style = BirikimTheme.typography.label,
                                 color = BirikimTheme.colors.textSecondary
                             )
@@ -118,12 +119,12 @@ fun GoalsScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Biriken: ${CurrencyUtils.formatCurrency(item.goal.savedAmount)}",
+                            text = stringResource(R.string.goal_saved, CurrencyUtils.formatCurrency(item.goal.savedAmount)),
                             style = BirikimTheme.typography.body.copy(fontWeight = FontWeight.Medium),
                             color = BirikimTheme.colors.income
                         )
                         Text(
-                            text = "Kalan: ${CurrencyUtils.formatCurrency(item.calculation.remainingAmount)}",
+                            text = stringResource(R.string.goal_remaining, CurrencyUtils.formatCurrency(item.calculation.remainingAmount)),
                             style = BirikimTheme.typography.body,
                             color = BirikimTheme.colors.textSecondary
                         )
@@ -133,13 +134,17 @@ fun GoalsScreen(
 
                     if (item.calculation.remainingAmount > 0) {
                         Text(
-                            text = "Bu hedefe ulaşmak için ayda ${CurrencyUtils.formatCurrency(item.calculation.monthlyRequired)} biriktirmelisin. (Tahmini ${item.calculation.estimatedMonths} ay)",
+                            text = stringResource(
+                                R.string.goal_monthly_recommendation,
+                                CurrencyUtils.formatCurrency(item.calculation.monthlyRequired),
+                                item.calculation.estimatedMonths
+                            ),
                             style = BirikimTheme.typography.label,
                             color = BirikimTheme.colors.primary
                         )
                     } else {
                         Text(
-                            text = "Tebrikler! Bu hedefe ulaştın 🎉",
+                            text = stringResource(R.string.goal_achieved),
                             style = BirikimTheme.typography.label.copy(fontWeight = FontWeight.Bold),
                             color = BirikimTheme.colors.income
                         )
@@ -152,7 +157,7 @@ fun GoalsScreen(
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         HPillButton(
-                            text = "Para Ekle",
+                            text = stringResource(R.string.add_deposit),
                             onClick = { viewModel.openAddMoneySheet(item.goal) },
                             modifier = Modifier.weight(1f)
                         )
@@ -163,7 +168,7 @@ fun GoalsScreen(
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Delete,
-                                contentDescription = "Hedefi sil",
+                                contentDescription = stringResource(R.string.clear_history),
                                 tint = BirikimTheme.colors.textTertiary
                             )
                         }
@@ -186,7 +191,7 @@ fun GoalsScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Text(
-                        text = "Yeni Birikim Hedefi",
+                        text = stringResource(R.string.new_goal_dialog_title),
                         style = BirikimTheme.typography.titleLarge,
                         color = BirikimTheme.colors.textPrimary
                     )
@@ -194,7 +199,7 @@ fun GoalsScreen(
                     OutlinedTextField(
                         value = uiState.inputName,
                         onValueChange = { viewModel.setInputName(it) },
-                        label = { Text("Hedef Adı (ör. Tatil, Araba)") },
+                        label = { Text(stringResource(R.string.goal_title_label)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = BirikimTheme.shapes.input,
                         singleLine = true
@@ -203,7 +208,7 @@ fun GoalsScreen(
                     OutlinedTextField(
                         value = uiState.inputTargetAmountText,
                         onValueChange = { viewModel.setInputTargetAmount(it) },
-                        label = { Text("Hedef Tutar (₺)") },
+                        label = { Text(stringResource(R.string.target_amount_label)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = BirikimTheme.shapes.input,
                         singleLine = true
@@ -212,14 +217,14 @@ fun GoalsScreen(
                     OutlinedTextField(
                         value = uiState.inputTargetMonthsText,
                         onValueChange = { viewModel.setInputTargetMonths(it) },
-                        label = { Text("Hedef Süre (Ay)") },
+                        label = { Text(stringResource(R.string.duration_months)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = BirikimTheme.shapes.input,
                         singleLine = true
                     )
 
                     HPillButton(
-                        text = "Hedef Oluştur",
+                        text = stringResource(R.string.btn_create),
                         onClick = { viewModel.saveGoal() },
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -243,7 +248,7 @@ fun GoalsScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Text(
-                        text = "${uiState.selectedGoal?.name ?: ""} Hedefine Para Ekle",
+                        text = "${uiState.selectedGoal?.name ?: ""} - ${stringResource(R.string.deposit_dialog_title)}",
                         style = BirikimTheme.typography.titleLarge,
                         color = BirikimTheme.colors.textPrimary
                     )
@@ -251,7 +256,7 @@ fun GoalsScreen(
                     OutlinedTextField(
                         value = uiState.inputAddMoneyAmountText,
                         onValueChange = { viewModel.setAddMoneyAmount(it) },
-                        label = { Text("Eklenecek Tutar (₺)") },
+                        label = { Text(stringResource(R.string.amount_to_add)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = BirikimTheme.shapes.input,
                         singleLine = true
@@ -266,14 +271,14 @@ fun GoalsScreen(
                             onCheckedChange = { viewModel.setDeductFromBalance(it) }
                         )
                         Text(
-                            text = "Mevcut bakiyeden düşülsün mü?",
+                            text = stringResource(R.string.deduct_from_balance_question),
                             style = BirikimTheme.typography.body,
                             color = BirikimTheme.colors.textPrimary
                         )
                     }
 
                     HPillButton(
-                        text = "Birikime Ekle",
+                        text = stringResource(R.string.add_deposit),
                         onClick = { viewModel.saveAddMoney() },
                         backgroundColor = BirikimTheme.colors.income,
                         modifier = Modifier.fillMaxWidth()

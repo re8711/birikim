@@ -24,10 +24,10 @@ import java.util.concurrent.TimeUnit
  */
 @HiltWorker
 class ReminderWorker @AssistedInject constructor(
-    @Assisted private val context: Context,
+    @Assisted appContext: Context,
     @Assisted workerParams: WorkerParameters,
     private val transactionDao: TransactionDao
-) : CoroutineWorker(context, workerParams) {
+) : CoroutineWorker(appContext, workerParams) {
 
     companion object {
         const val CHANNEL_ID = "birikim_reminders"
@@ -121,9 +121,9 @@ class ReminderWorker @AssistedInject constructor(
  */
 @HiltWorker
 class ReminderNotificationWorker @AssistedInject constructor(
-    @Assisted private val context: Context,
+    @Assisted private val appContext: Context,
     @Assisted workerParams: WorkerParameters
-) : CoroutineWorker(context, workerParams) {
+) : CoroutineWorker(appContext, workerParams) {
 
     override suspend fun doWork(): Result {
         val title = inputData.getString(KEY_TRANSACTION_TITLE) ?: return Result.failure()
@@ -145,7 +145,7 @@ class ReminderNotificationWorker @AssistedInject constructor(
         // Android 13+ için bildirim izni kontrolü
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
-                    context,
+                    appContext,
                     Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
@@ -153,7 +153,7 @@ class ReminderNotificationWorker @AssistedInject constructor(
             }
         }
 
-        val notification = NotificationCompat.Builder(context, ReminderWorker.CHANNEL_ID)
+        val notification = NotificationCompat.Builder(appContext, ReminderWorker.CHANNEL_ID)
             .setSmallIcon(android.R.drawable.ic_dialog_info) // TODO: custom icon
             .setContentTitle(title)
             .setContentText(body)
@@ -161,7 +161,7 @@ class ReminderNotificationWorker @AssistedInject constructor(
             .setAutoCancel(true)
             .build()
 
-        NotificationManagerCompat.from(context).notify(id, notification)
+        NotificationManagerCompat.from(appContext).notify(id, notification)
     }
 
     companion object {

@@ -16,9 +16,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import com.rslsoft.birikim.R
 import com.rslsoft.birikim.ui.theme.BirikimTheme
 
 /**
@@ -61,15 +63,17 @@ object BiometricHelper {
 
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
-                // Kullanıcı tekrar deneyebilir, bir şey yapma
             }
         }
 
         val biometricPrompt = BiometricPrompt(activity, executor, callback)
 
+        val title = activity.getString(R.string.biometric_prompt_title)
+        val subtitle = activity.getString(R.string.biometric_prompt_subtitle)
+
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Birikim'e Giriş")
-            .setSubtitle("Kimliğinizi doğrulayın")
+            .setTitle(title)
+            .setSubtitle(subtitle)
             .setAllowedAuthenticators(
                 BiometricManager.Authenticators.BIOMETRIC_STRONG or
                 BiometricManager.Authenticators.DEVICE_CREDENTIAL
@@ -114,25 +118,25 @@ fun BiometricLockScreen(
         ) {
             Icon(
                 imageVector = Icons.Outlined.Fingerprint,
-                contentDescription = "Biyometrik doğrulama",
+                contentDescription = stringResource(R.string.biometric_lock),
                 tint = BirikimTheme.colors.primary,
                 modifier = Modifier.size(64.dp)
             )
             Text(
-                text = "Birikim kilitli",
+                text = stringResource(R.string.app_locked),
                 style = BirikimTheme.typography.titleLarge,
                 color = BirikimTheme.colors.textPrimary
             )
             Text(
-                text = "Devam etmek için kimliğinizi doğrulayın",
+                text = stringResource(R.string.verify_identity),
                 style = BirikimTheme.typography.body,
                 color = BirikimTheme.colors.textSecondary
             )
             Spacer(modifier = Modifier.height(16.dp))
             HPillButton(
-                text = "Kilidi Aç",
+                text = stringResource(R.string.btn_unlock),
                 onClick = onAuthenticate,
-                contentDescription = "Biyometrik doğrulama ile kilidi aç"
+                contentDescription = stringResource(R.string.btn_unlock)
             )
         }
     }

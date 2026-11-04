@@ -18,12 +18,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rslsoft.birikim.R
 import com.rslsoft.birikim.data.model.CalculationType
 import com.rslsoft.birikim.data.model.Recurrence
 import com.rslsoft.birikim.data.model.TransactionType
+import com.rslsoft.birikim.data.model.getDisplayName
 import com.rslsoft.birikim.domain.CurrencyUtils
 import com.rslsoft.birikim.domain.FinanceCalculations
 import com.rslsoft.birikim.ui.components.*
@@ -52,7 +55,7 @@ fun CalculatorScreen(
             // Header
             item {
                 Text(
-                    text = "Hesap Makinesi",
+                    text = stringResource(R.string.nav_calculator),
                     style = BirikimTheme.typography.titleLarge,
                     color = BirikimTheme.colors.textPrimary,
                     modifier = Modifier.padding(vertical = 4.dp)
@@ -68,10 +71,10 @@ fun CalculatorScreen(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     val modes = listOf(
-                        CalculatorMode.SUBSCRIPTION to "Abonelik/Fatura",
-                        CalculatorMode.INSTALLMENT to "Taksit",
-                        CalculatorMode.COMPOUND_INTEREST to "Faiz/Birikim",
-                        CalculatorMode.NORMAL to "Normal"
+                        CalculatorMode.SUBSCRIPTION to stringResource(R.string.calc_mode_sub),
+                        CalculatorMode.INSTALLMENT to stringResource(R.string.calc_mode_inst),
+                        CalculatorMode.COMPOUND_INTEREST to stringResource(R.string.calc_mode_comp),
+                        CalculatorMode.NORMAL to stringResource(R.string.calc_mode_norm)
                     )
 
                     modes.forEach { (mode, label) ->
@@ -138,7 +141,7 @@ fun CalculatorScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(
-                            text = "Hesap Geçmişi",
+                            text = stringResource(R.string.calc_history_title),
                             style = BirikimTheme.typography.cardTitle,
                             color = BirikimTheme.colors.textPrimary
                         )
@@ -156,10 +159,10 @@ fun CalculatorScreen(
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(
                                             text = when (history.type) {
-                                                CalculationType.SUBSCRIPTION -> "Abonelik/Fatura"
-                                                CalculationType.INSTALLMENT -> "Taksit"
-                                                CalculationType.COMPOUND_INTEREST -> "Faiz/Birikim"
-                                                CalculationType.NORMAL -> "Normal Hesap"
+                                                CalculationType.SUBSCRIPTION -> stringResource(R.string.sub_title)
+                                                CalculationType.INSTALLMENT -> stringResource(R.string.calc_mode_inst)
+                                                CalculationType.COMPOUND_INTEREST -> stringResource(R.string.calc_mode_comp)
+                                                CalculationType.NORMAL -> stringResource(R.string.normal_calc_title)
                                             },
                                             style = BirikimTheme.typography.label,
                                             color = BirikimTheme.colors.primary
@@ -176,7 +179,7 @@ fun CalculatorScreen(
                                     ) {
                                         Icon(
                                             imageVector = Icons.Outlined.Delete,
-                                            contentDescription = "Sil",
+                                            contentDescription = stringResource(R.string.clear_history),
                                             tint = BirikimTheme.colors.textTertiary,
                                             modifier = Modifier.size(20.dp)
                                         )
@@ -203,7 +206,7 @@ fun CalculatorScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Text(
-                        text = if (uiState.saveType == TransactionType.EXPENSE) "Gider Olarak Kaydet" else "Gelir Olarak Kaydet",
+                        text = if (uiState.saveType == TransactionType.EXPENSE) stringResource(R.string.save_sheet_expense_title) else stringResource(R.string.save_sheet_income_title),
                         style = BirikimTheme.typography.titleLarge,
                         color = BirikimTheme.colors.textPrimary
                     )
@@ -211,14 +214,14 @@ fun CalculatorScreen(
                     OutlinedTextField(
                         value = uiState.saveTitle,
                         onValueChange = { viewModel.setSaveTitle(it) },
-                        label = { Text("Başlık (ör. Netflix, Kira)") },
+                        label = { Text(stringResource(R.string.title_label_hint)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = BirikimTheme.shapes.input,
                         singleLine = true
                     )
 
                     Text(
-                        text = "Kategori Seçin",
+                        text = stringResource(R.string.select_category),
                         style = BirikimTheme.typography.label,
                         color = BirikimTheme.colors.textSecondary
                     )
@@ -242,7 +245,7 @@ fun CalculatorScreen(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = category.name,
+                                    text = category.getDisplayName(),
                                     style = BirikimTheme.typography.label,
                                     color = if (isSelected) Color.White else BirikimTheme.colors.textPrimary
                                 )
@@ -251,13 +254,13 @@ fun CalculatorScreen(
                     }
 
                     Text(
-                        text = "Tutar: ${CurrencyUtils.formatCurrency(uiState.saveAmountKurus)}",
+                        text = stringResource(R.string.amount_display, CurrencyUtils.formatCurrency(uiState.saveAmountKurus)),
                         style = BirikimTheme.typography.cardTitle,
                         color = if (uiState.saveType == TransactionType.EXPENSE) BirikimTheme.colors.expense else BirikimTheme.colors.income
                     )
 
                     HPillButton(
-                        text = "Kaydet",
+                        text = stringResource(R.string.btn_save),
                         onClick = { viewModel.confirmSaveTransaction() },
                         backgroundColor = if (uiState.saveType == TransactionType.EXPENSE) BirikimTheme.colors.expense else BirikimTheme.colors.income,
                         modifier = Modifier.fillMaxWidth()
@@ -275,9 +278,12 @@ private fun SubscriptionCalculatorSection(
     uiState: CalculatorUiState,
     viewModel: CalculatorViewModel
 ) {
+    val defaultSubTitle = stringResource(R.string.default_title_sub)
+    val defaultIncTitle = stringResource(R.string.default_title_inc)
+
     HCard(modifier = Modifier.fillMaxWidth()) {
         Text(
-            text = "Abonelik / Fatura",
+            text = stringResource(R.string.sub_title),
             style = BirikimTheme.typography.cardTitle,
             color = BirikimTheme.colors.textPrimary
         )
@@ -300,11 +306,11 @@ private fun SubscriptionCalculatorSection(
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             val freqs = listOf(
-                FinanceCalculations.SubscriptionFrequency.WEEKLY to "Haftalık",
-                FinanceCalculations.SubscriptionFrequency.MONTHLY to "Aylık",
-                FinanceCalculations.SubscriptionFrequency.QUARTERLY to "3 Aylık",
-                FinanceCalculations.SubscriptionFrequency.SEMI_ANNUALLY to "6 Aylık",
-                FinanceCalculations.SubscriptionFrequency.YEARLY to "Yıllık"
+                FinanceCalculations.SubscriptionFrequency.WEEKLY to stringResource(R.string.sub_freq_weekly),
+                FinanceCalculations.SubscriptionFrequency.MONTHLY to stringResource(R.string.sub_freq_monthly),
+                FinanceCalculations.SubscriptionFrequency.QUARTERLY to stringResource(R.string.sub_freq_quarterly),
+                FinanceCalculations.SubscriptionFrequency.SEMI_ANNUALLY to stringResource(R.string.sub_freq_semi_annual),
+                FinanceCalculations.SubscriptionFrequency.YEARLY to stringResource(R.string.sub_freq_yearly)
             )
 
             freqs.forEach { (freq, label) ->
@@ -330,7 +336,7 @@ private fun SubscriptionCalculatorSection(
         OutlinedTextField(
             value = uiState.subIncreasePercentText,
             onValueChange = { viewModel.setSubIncrease(it) },
-            label = { Text("Yıllık Tahmini Zam Oranı (%)") },
+            label = { Text(stringResource(R.string.annual_increase)) },
             modifier = Modifier.fillMaxWidth(),
             shape = BirikimTheme.shapes.input,
             singleLine = true
@@ -353,11 +359,11 @@ private fun SubscriptionCalculatorSection(
             Spacer(modifier = Modifier.height(16.dp))
 
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                ResultRow("Aylık Maliyet", result.monthlyCost)
-                ResultRow("3 Aylık Maliyet", result.quarterlyCost)
-                ResultRow("6 Aylık Maliyet", result.semiAnnualCost)
-                ResultRow("Yıllık Maliyet", result.yearlyCost, isBold = true)
-                ResultRow("5 Yıllık Toplam", result.fiveYearCost, isBold = true)
+                ResultRow(stringResource(R.string.monthly_cost), result.monthlyCost)
+                ResultRow(stringResource(R.string.quarterly_total), result.quarterlyCost)
+                ResultRow(stringResource(R.string.semi_annual_total), result.semiAnnualCost)
+                ResultRow(stringResource(R.string.yearly_total), result.yearlyCost, isBold = true)
+                ResultRow(stringResource(R.string.five_year_total), result.fiveYearCost, isBold = true)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -367,14 +373,14 @@ private fun SubscriptionCalculatorSection(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 HPillButton(
-                    text = "Gider Kaydet",
-                    onClick = { viewModel.openSaveSheet(TransactionType.EXPENSE, result.monthlyCost, "Abonelik") },
+                    text = stringResource(R.string.save_as_expense),
+                    onClick = { viewModel.openSaveSheet(TransactionType.EXPENSE, result.monthlyCost, defaultSubTitle) },
                     backgroundColor = BirikimTheme.colors.expense,
                     modifier = Modifier.weight(1f)
                 )
                 HPillButton(
-                    text = "Gelir Kaydet",
-                    onClick = { viewModel.openSaveSheet(TransactionType.INCOME, result.monthlyCost, "Gelir") },
+                    text = stringResource(R.string.save_as_income),
+                    onClick = { viewModel.openSaveSheet(TransactionType.INCOME, result.monthlyCost, defaultIncTitle) },
                     backgroundColor = BirikimTheme.colors.income,
                     modifier = Modifier.weight(1f)
                 )
@@ -388,9 +394,11 @@ private fun InstallmentCalculatorSection(
     uiState: CalculatorUiState,
     viewModel: CalculatorViewModel
 ) {
+    val defaultInstTitle = stringResource(R.string.default_title_inst)
+
     HCard(modifier = Modifier.fillMaxWidth()) {
         Text(
-            text = "Taksit Hesaplama",
+            text = stringResource(R.string.inst_title),
             style = BirikimTheme.typography.cardTitle,
             color = BirikimTheme.colors.textPrimary
         )
@@ -400,7 +408,7 @@ private fun InstallmentCalculatorSection(
         OutlinedTextField(
             value = uiState.instTotalAmountText,
             onValueChange = { viewModel.setInstAmount(it) },
-            label = { Text("Toplam Borç Tutarı (₺)") },
+            label = { Text(stringResource(R.string.total_debt)) },
             modifier = Modifier.fillMaxWidth(),
             shape = BirikimTheme.shapes.input,
             singleLine = true
@@ -415,7 +423,7 @@ private fun InstallmentCalculatorSection(
             OutlinedTextField(
                 value = uiState.instCountText,
                 onValueChange = { viewModel.setInstCount(it) },
-                label = { Text("Taksit Sayısı") },
+                label = { Text(stringResource(R.string.inst_count)) },
                 modifier = Modifier.weight(1f),
                 shape = BirikimTheme.shapes.input,
                 singleLine = true
@@ -424,7 +432,7 @@ private fun InstallmentCalculatorSection(
             OutlinedTextField(
                 value = uiState.instInterestPercentText,
                 onValueChange = { viewModel.setInstInterest(it) },
-                label = { Text("Aylık Faiz (%)") },
+                label = { Text(stringResource(R.string.monthly_interest)) },
                 modifier = Modifier.weight(1f),
                 shape = BirikimTheme.shapes.input,
                 singleLine = true
@@ -438,16 +446,16 @@ private fun InstallmentCalculatorSection(
             Spacer(modifier = Modifier.height(16.dp))
 
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                ResultRow("Aylık Taksit", result.monthlyPayment, isBold = true)
-                ResultRow("Toplam Ödeme", result.totalPayment)
-                ResultRow("Toplam Faiz", result.totalInterest)
+                ResultRow(stringResource(R.string.monthly_installment), result.monthlyPayment, isBold = true)
+                ResultRow(stringResource(R.string.total_payment), result.totalPayment)
+                ResultRow(stringResource(R.string.total_interest), result.totalInterest)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             HPillButton(
-                text = "Gider Olarak Kaydet",
-                onClick = { viewModel.openSaveSheet(TransactionType.EXPENSE, result.monthlyPayment, "Taksit Ödemesi") },
+                text = stringResource(R.string.save_sheet_expense_title),
+                onClick = { viewModel.openSaveSheet(TransactionType.EXPENSE, result.monthlyPayment, defaultInstTitle) },
                 backgroundColor = BirikimTheme.colors.expense,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -462,7 +470,7 @@ private fun CompoundInterestCalculatorSection(
 ) {
     HCard(modifier = Modifier.fillMaxWidth()) {
         Text(
-            text = "Faiz / Birikim Hesaplama",
+            text = stringResource(R.string.comp_title),
             style = BirikimTheme.typography.cardTitle,
             color = BirikimTheme.colors.textPrimary
         )
@@ -472,7 +480,7 @@ private fun CompoundInterestCalculatorSection(
         OutlinedTextField(
             value = uiState.compMonthlyDepositText,
             onValueChange = { viewModel.setCompMonthlyDeposit(it) },
-            label = { Text("Aylık Biriktirilen Tutar (₺)") },
+            label = { Text(stringResource(R.string.monthly_deposit)) },
             modifier = Modifier.fillMaxWidth(),
             shape = BirikimTheme.shapes.input,
             singleLine = true
@@ -487,7 +495,7 @@ private fun CompoundInterestCalculatorSection(
             OutlinedTextField(
                 value = uiState.compInterestPercentText,
                 onValueChange = { viewModel.setCompInterest(it) },
-                label = { Text("Yıllık Faiz Oranı (%)") },
+                label = { Text(stringResource(R.string.annual_interest)) },
                 modifier = Modifier.weight(1f),
                 shape = BirikimTheme.shapes.input,
                 singleLine = true
@@ -496,7 +504,7 @@ private fun CompoundInterestCalculatorSection(
             OutlinedTextField(
                 value = uiState.compMonthsText,
                 onValueChange = { viewModel.setCompMonths(it) },
-                label = { Text("Süre (Ay)") },
+                label = { Text(stringResource(R.string.duration_months)) },
                 modifier = Modifier.weight(1f),
                 shape = BirikimTheme.shapes.input,
                 singleLine = true
@@ -510,9 +518,9 @@ private fun CompoundInterestCalculatorSection(
             Spacer(modifier = Modifier.height(16.dp))
 
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                ResultRow("Vade Sonu Tutar", result.totalAmount, isBold = true)
-                ResultRow("Yatırılan Anapara", result.totalDeposited)
-                ResultRow("Kazanılan Faiz", result.totalInterestEarned)
+                ResultRow(stringResource(R.string.amount_at_end), result.totalAmount, isBold = true)
+                ResultRow(stringResource(R.string.total_deposited), result.totalDeposited)
+                ResultRow(stringResource(R.string.total_interest_earned), result.totalInterestEarned)
             }
         }
     }
@@ -525,7 +533,7 @@ private fun NormalCalculatorSection(
 ) {
     HCard(modifier = Modifier.fillMaxWidth()) {
         Text(
-            text = "Temel Hesap Makinesi",
+            text = stringResource(R.string.normal_calc_title),
             style = BirikimTheme.typography.cardTitle,
             color = BirikimTheme.colors.textPrimary
         )

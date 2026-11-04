@@ -21,11 +21,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rslsoft.birikim.R
 import com.rslsoft.birikim.data.model.Recurrence
 import com.rslsoft.birikim.data.model.TransactionType
+import com.rslsoft.birikim.data.model.getDisplayName
 import com.rslsoft.birikim.domain.CurrencyUtils
 import com.rslsoft.birikim.ui.components.*
 import com.rslsoft.birikim.ui.screens.home.parseHexColor
@@ -60,15 +63,15 @@ fun HistoryScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "İşlem Geçmişi",
+                        text = stringResource(R.string.history_title),
                         style = BirikimTheme.typography.titleLarge,
                         color = BirikimTheme.colors.textPrimary
                     )
 
                     HPillButton(
-                        text = "+ Yeni İşlem",
+                        text = stringResource(R.string.btn_new_transaction),
                         onClick = { viewModel.openAddSheet() },
-                        contentDescription = "Yeni işlem ekle"
+                        contentDescription = stringResource(R.string.btn_new_transaction)
                     )
                 }
             }
@@ -78,7 +81,7 @@ fun HistoryScreen(
                 OutlinedTextField(
                     value = uiState.searchQuery,
                     onValueChange = { viewModel.setSearchQuery(it) },
-                    placeholder = { Text("İşlem veya kategori ara...") },
+                    placeholder = { Text(stringResource(R.string.search_hint)) },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Outlined.Search,
@@ -99,9 +102,9 @@ fun HistoryScreen(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     val filters = listOf(
-                        HistoryFilter.ALL to "Tümü",
-                        HistoryFilter.INCOME to "Gelir",
-                        HistoryFilter.EXPENSE to "Gider"
+                        HistoryFilter.ALL to stringResource(R.string.filter_all),
+                        HistoryFilter.INCOME to stringResource(R.string.filter_income),
+                        HistoryFilter.EXPENSE to stringResource(R.string.filter_expense)
                     )
 
                     filters.forEach { (filter, label) ->
@@ -129,7 +132,7 @@ fun HistoryScreen(
                 item {
                     HCard(modifier = Modifier.fillMaxWidth()) {
                         Text(
-                            text = "Henüz işlem yok. Sağ üstteki '+ Yeni İşlem' butonundan ekleyebilirsin.",
+                            text = stringResource(R.string.no_transactions_yet),
                             style = BirikimTheme.typography.body,
                             color = BirikimTheme.colors.textTertiary,
                             modifier = Modifier.padding(vertical = 16.dp)
@@ -142,7 +145,11 @@ fun HistoryScreen(
             uiState.groupedTransactions.forEach { group ->
                 item {
                     Text(
-                        text = group.dateLabel,
+                        text = when (group.dateLabel) {
+                            "Bugün" -> stringResource(R.string.date_today)
+                            "Dün" -> stringResource(R.string.date_yesterday)
+                            else -> group.dateLabel
+                        },
                         style = BirikimTheme.typography.label.copy(fontWeight = FontWeight.Bold),
                         color = BirikimTheme.colors.textSecondary,
                         modifier = Modifier.padding(top = 8.dp)
@@ -188,7 +195,7 @@ fun HistoryScreen(
                                         color = BirikimTheme.colors.textPrimary
                                     )
                                     Text(
-                                        text = item.category?.name ?: "Diğer",
+                                        text = item.category?.getDisplayName() ?: stringResource(R.string.category_other),
                                         style = BirikimTheme.typography.label,
                                         color = BirikimTheme.colors.textSecondary
                                     )
@@ -212,7 +219,7 @@ fun HistoryScreen(
                                 ) {
                                     Icon(
                                         imageVector = Icons.Outlined.Edit,
-                                        contentDescription = "Düzenle",
+                                        contentDescription = stringResource(R.string.edit_transaction),
                                         tint = BirikimTheme.colors.textTertiary,
                                         modifier = Modifier.size(18.dp)
                                     )
@@ -224,7 +231,7 @@ fun HistoryScreen(
                                 ) {
                                     Icon(
                                         imageVector = Icons.Outlined.Delete,
-                                        contentDescription = "Sil",
+                                        contentDescription = stringResource(R.string.clear_history),
                                         tint = BirikimTheme.colors.textTertiary,
                                         modifier = Modifier.size(18.dp)
                                     )
@@ -250,7 +257,7 @@ fun HistoryScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Text(
-                        text = if (uiState.editingTransaction != null) "İşlemi Düzenle" else "Yeni İşlem Ekle",
+                        text = if (uiState.editingTransaction != null) stringResource(R.string.edit_transaction) else stringResource(R.string.btn_new_transaction),
                         style = BirikimTheme.typography.titleLarge,
                         color = BirikimTheme.colors.textPrimary
                     )
@@ -261,7 +268,7 @@ fun HistoryScreen(
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         HPillButton(
-                            text = "Gider",
+                            text = stringResource(R.string.type_expense),
                             onClick = { viewModel.setInputType(TransactionType.EXPENSE) },
                             backgroundColor = if (uiState.inputType == TransactionType.EXPENSE) BirikimTheme.colors.expense else BirikimTheme.colors.background,
                             textColor = if (uiState.inputType == TransactionType.EXPENSE) Color.White else BirikimTheme.colors.textPrimary,
@@ -269,7 +276,7 @@ fun HistoryScreen(
                         )
 
                         HPillButton(
-                            text = "Gelir",
+                            text = stringResource(R.string.type_income),
                             onClick = { viewModel.setInputType(TransactionType.INCOME) },
                             backgroundColor = if (uiState.inputType == TransactionType.INCOME) BirikimTheme.colors.income else BirikimTheme.colors.background,
                             textColor = if (uiState.inputType == TransactionType.INCOME) Color.White else BirikimTheme.colors.textPrimary,
@@ -280,7 +287,7 @@ fun HistoryScreen(
                     OutlinedTextField(
                         value = uiState.inputTitle,
                         onValueChange = { viewModel.setInputTitle(it) },
-                        label = { Text("Başlık") },
+                        label = { Text(stringResource(R.string.title_label)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = BirikimTheme.shapes.input,
                         singleLine = true
@@ -289,7 +296,7 @@ fun HistoryScreen(
                     OutlinedTextField(
                         value = uiState.inputAmountText,
                         onValueChange = { viewModel.setInputAmountText(it) },
-                        label = { Text("Tutar (₺)") },
+                        label = { Text(stringResource(R.string.amount_label_simple)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = BirikimTheme.shapes.input,
                         singleLine = true
@@ -302,13 +309,13 @@ fun HistoryScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Kategori",
+                            text = stringResource(R.string.category_label),
                             style = BirikimTheme.typography.label,
                             color = BirikimTheme.colors.textSecondary
                         )
 
                         Text(
-                            text = "+ Yeni Kategori",
+                            text = stringResource(R.string.btn_add_category),
                             style = BirikimTheme.typography.label,
                             color = BirikimTheme.colors.primary,
                             modifier = Modifier.clickable { viewModel.openAddCategoryDialog() }
@@ -334,7 +341,48 @@ fun HistoryScreen(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = category.name,
+                                    text = category.getDisplayName(),
+                                    style = BirikimTheme.typography.label,
+                                    color = if (isSelected) Color.White else BirikimTheme.colors.textPrimary
+                                )
+                            }
+                        }
+                    }
+
+                    // Recurrence selection
+                    Text(
+                        text = stringResource(R.string.recurrence_label),
+                        style = BirikimTheme.typography.label,
+                        color = BirikimTheme.colors.textSecondary
+                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        val recurrences = listOf(
+                            Recurrence.ONCE to stringResource(R.string.rec_once),
+                            Recurrence.WEEKLY to stringResource(R.string.rec_weekly),
+                            Recurrence.MONTHLY to stringResource(R.string.rec_monthly),
+                            Recurrence.QUARTERLY to stringResource(R.string.rec_quarterly),
+                            Recurrence.SEMI_ANNUALLY to stringResource(R.string.rec_semi_annually),
+                            Recurrence.YEARLY to stringResource(R.string.rec_yearly)
+                        )
+
+                        recurrences.forEach { (rec, label) ->
+                            val isSelected = rec == uiState.inputRecurrence
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(50))
+                                    .background(if (isSelected) BirikimTheme.colors.primary else BirikimTheme.colors.background)
+                                    .clickable { viewModel.setInputRecurrence(rec) }
+                                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = label,
                                     style = BirikimTheme.typography.label,
                                     color = if (isSelected) Color.White else BirikimTheme.colors.textPrimary
                                 )
@@ -343,7 +391,7 @@ fun HistoryScreen(
                     }
 
                     HPillButton(
-                        text = "Kaydet",
+                        text = stringResource(R.string.btn_save),
                         onClick = { viewModel.saveTransaction() },
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -357,13 +405,13 @@ fun HistoryScreen(
         if (uiState.showCategoryAddDialog) {
             AlertDialog(
                 onDismissRequest = { viewModel.closeAddCategoryDialog() },
-                title = { Text("Yeni Kategori Ekle", style = BirikimTheme.typography.titleLarge) },
+                title = { Text(stringResource(R.string.new_category_dialog_title), style = BirikimTheme.typography.titleLarge) },
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         OutlinedTextField(
                             value = uiState.newCategoryName,
                             onValueChange = { viewModel.setNewCategoryName(it) },
-                            label = { Text("Kategori Adı") },
+                            label = { Text(stringResource(R.string.category_name_label)) },
                             modifier = Modifier.fillMaxWidth(),
                             shape = BirikimTheme.shapes.input,
                             singleLine = true
@@ -372,13 +420,13 @@ fun HistoryScreen(
                 },
                 confirmButton = {
                     HPillButton(
-                        text = "Ekle",
+                        text = stringResource(R.string.btn_add),
                         onClick = { viewModel.saveNewCategory() }
                     )
                 },
                 dismissButton = {
                     HPillButton(
-                        text = "İptal",
+                        text = stringResource(R.string.btn_cancel),
                         onClick = { viewModel.closeAddCategoryDialog() },
                         backgroundColor = BirikimTheme.colors.background,
                         textColor = BirikimTheme.colors.textPrimary

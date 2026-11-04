@@ -1,7 +1,10 @@
 package com.rslsoft.birikim.data.model
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.rslsoft.birikim.R
 
 @Entity(tableName = "categories")
 data class Category(
@@ -25,5 +28,23 @@ data class Category(
             Category(id = 10, name = "Ek Gelir", iconKey = "add_chart", colorHex = "#0EA5E9", isDefault = true),
             Category(id = 11, name = "Diğer", iconKey = "more_horiz", colorHex = "#78909C", isDefault = true)
         )
+    }
+}
+
+@Composable
+fun Category.getDisplayName(): String {
+    return when (id) {
+        1L -> stringResource(R.string.cat_bills)
+        2L -> stringResource(R.string.cat_rent)
+        3L -> stringResource(R.string.cat_subscription)
+        4L -> stringResource(R.string.cat_groceries)
+        5L -> stringResource(R.string.cat_transport)
+        6L -> stringResource(R.string.cat_health)
+        7L -> stringResource(R.string.cat_entertainment)
+        8L -> stringResource(R.string.cat_education)
+        9L -> stringResource(R.string.cat_salary)
+        10L -> stringResource(R.string.cat_side_income)
+        11L -> stringResource(R.string.cat_other)
+        else -> name
     }
 }

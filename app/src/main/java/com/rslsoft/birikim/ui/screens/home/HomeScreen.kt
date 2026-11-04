@@ -14,10 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rslsoft.birikim.R
 import com.rslsoft.birikim.data.model.TransactionType
+import com.rslsoft.birikim.data.model.getDisplayName
 import com.rslsoft.birikim.domain.CurrencyUtils
 import com.rslsoft.birikim.ui.components.*
 import com.rslsoft.birikim.ui.theme.BirikimTheme
@@ -57,12 +60,12 @@ fun HomeScreen(
                 ) {
                     Column {
                         Text(
-                            text = "Merhaba",
+                            text = stringResource(R.string.greeting_hello),
                             style = BirikimTheme.typography.label,
                             color = BirikimTheme.colors.textSecondary
                         )
                         Text(
-                            text = "Birikim",
+                            text = stringResource(R.string.greeting_app_name),
                             style = BirikimTheme.typography.titleLarge,
                             color = BirikimTheme.colors.textPrimary
                         )
@@ -74,7 +77,7 @@ fun HomeScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.Settings,
-                            contentDescription = "Ayarlar",
+                            contentDescription = stringResource(R.string.settings_title),
                             tint = BirikimTheme.colors.textPrimary
                         )
                     }
@@ -94,10 +97,10 @@ fun HomeScreen(
             // c) Dönem Segment Kontrolü
             item {
                 HSegmentedControl(
-                    items = listOf("Aylık", "Yıllık"),
+                    items = listOf(stringResource(R.string.period_monthly), stringResource(R.string.period_yearly)),
                     selectedIndex = if (uiState.isYearly) 1 else 0,
                     onSelectionChanged = { index -> viewModel.setPeriod(index == 1) },
-                    contentDescription = "Dönem seçici"
+                    contentDescription = stringResource(R.string.period_selector_desc)
                 )
             }
 
@@ -105,7 +108,7 @@ fun HomeScreen(
             item {
                 HCard {
                     Text(
-                        text = if (uiState.isYearly) "Yıllık Özet" else "Aylık Özet",
+                        text = if (uiState.isYearly) stringResource(R.string.yearly_summary) else stringResource(R.string.monthly_summary),
                         style = BirikimTheme.typography.cardTitle,
                         color = BirikimTheme.colors.textSecondary
                     )
@@ -117,7 +120,7 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Toplam Gelir",
+                            text = stringResource(R.string.total_income),
                             style = BirikimTheme.typography.body,
                             color = BirikimTheme.colors.textSecondary
                         )
@@ -135,7 +138,7 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = "Toplam Gider",
+                            text = stringResource(R.string.total_expense),
                             style = BirikimTheme.typography.body,
                             color = BirikimTheme.colors.textSecondary
                         )
@@ -151,7 +154,7 @@ fun HomeScreen(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
-                        text = "Dönem sonunda kalacak para",
+                        text = stringResource(R.string.end_of_period_balance),
                         style = BirikimTheme.typography.label,
                         color = BirikimTheme.colors.textSecondary
                     )
@@ -181,7 +184,7 @@ fun HomeScreen(
                                 modifier = Modifier.size(16.dp)
                             )
                             Text(
-                                text = "Bu dönemde açık veriyorsun",
+                                text = stringResource(R.string.deficit_warning),
                                 style = BirikimTheme.typography.label,
                                 color = BirikimTheme.colors.warning
                             )
@@ -191,7 +194,7 @@ fun HomeScreen(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
-                        text = "Harcama Oranı (%${(uiState.expenseToIncomeRatio * 100).roundToInt()})",
+                        text = stringResource(R.string.spending_ratio, (uiState.expenseToIncomeRatio * 100).roundToInt()),
                         style = BirikimTheme.typography.label,
                         color = BirikimTheme.colors.textTertiary
                     )
@@ -208,7 +211,7 @@ fun HomeScreen(
                 item {
                     HCard {
                         Text(
-                            text = "Kategori Dağılımı",
+                            text = stringResource(R.string.category_distribution),
                             style = BirikimTheme.typography.cardTitle,
                             color = BirikimTheme.colors.textPrimary
                         )
@@ -218,7 +221,7 @@ fun HomeScreen(
                         val donutSegments = uiState.categoryExpenses.map { catExp ->
                             val color = parseHexColor(catExp.category.colorHex, BirikimTheme.colors.primary)
                             DonutSegment(
-                                label = catExp.category.name,
+                                label = catExp.category.getDisplayName(),
                                 value = catExp.amount,
                                 color = color
                             )
@@ -230,7 +233,7 @@ fun HomeScreen(
                                 .fillMaxWidth()
                                 .height(180.dp),
                             strokeWidth = 24.dp,
-                            centerSubText = "Toplam Gider",
+                            centerSubText = stringResource(R.string.total_expense),
                             centerText = CurrencyUtils.formatCurrencySmartDecimal(uiState.totalExpense)
                         )
 
@@ -257,7 +260,7 @@ fun HomeScreen(
                                             .background(color)
                                     )
                                     Text(
-                                        text = catExp.category.name,
+                                        text = catExp.category.getDisplayName(),
                                         style = BirikimTheme.typography.body,
                                         color = BirikimTheme.colors.textPrimary
                                     )
@@ -279,7 +282,7 @@ fun HomeScreen(
                 item {
                     HCard {
                         Text(
-                            text = "Yaklaşan Ödemeler (Önümüzdeki 7 Gün)",
+                            text = stringResource(R.string.upcoming_payments_title),
                             style = BirikimTheme.typography.cardTitle,
                             color = BirikimTheme.colors.textPrimary
                         )
@@ -308,11 +311,11 @@ fun HomeScreen(
                                 }
 
                                 HPillButton(
-                                    text = "Ödendi",
+                                    text = stringResource(R.string.btn_paid),
                                     onClick = { viewModel.markPaymentAsPaid(payment.transaction) },
                                     backgroundColor = BirikimTheme.colors.primarySubtle,
                                     textColor = BirikimTheme.colors.primary,
-                                    contentDescription = "${payment.transaction.title} ödendi olarak işaretle"
+                                    contentDescription = stringResource(R.string.marked_paid_desc, payment.transaction.title)
                                 )
                             }
                         }
@@ -329,13 +332,13 @@ fun HomeScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Son İşlemler",
+                            text = stringResource(R.string.recent_transactions_title),
                             style = BirikimTheme.typography.cardTitle,
                             color = BirikimTheme.colors.textPrimary
                         )
 
                         Text(
-                            text = "Tümünü gör",
+                            text = stringResource(R.string.see_all),
                             style = BirikimTheme.typography.label,
                             color = BirikimTheme.colors.primary,
                             modifier = Modifier.clickable { onNavigateToHistory() }
@@ -346,7 +349,7 @@ fun HomeScreen(
 
                     if (uiState.recentTransactions.isEmpty()) {
                         Text(
-                            text = "Henüz işlem yok. Hesap makinesinden ilk kaydını ekle.",
+                            text = stringResource(R.string.no_transactions_yet),
                             style = BirikimTheme.typography.body,
                             color = BirikimTheme.colors.textTertiary,
                             modifier = Modifier.padding(vertical = 16.dp)
@@ -388,7 +391,7 @@ fun HomeScreen(
                                             color = BirikimTheme.colors.textPrimary
                                         )
                                         Text(
-                                            text = item.category?.name ?: "Diğer",
+                                            text = item.category?.getDisplayName() ?: stringResource(R.string.category_other),
                                             style = BirikimTheme.typography.label,
                                             color = BirikimTheme.colors.textSecondary
                                         )
@@ -422,7 +425,7 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Text(
-                        text = "Bakiyeyi Güncelle",
+                        text = stringResource(R.string.btn_update_balance),
                         style = BirikimTheme.typography.titleLarge,
                         color = BirikimTheme.colors.textPrimary
                     )
@@ -430,7 +433,7 @@ fun HomeScreen(
                     OutlinedTextField(
                         value = updateAmountInput,
                         onValueChange = { updateAmountInput = it },
-                        label = { Text("Tutar (₺)") },
+                        label = { Text(stringResource(R.string.amount_label)) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = BirikimTheme.shapes.input,
                         singleLine = true
@@ -441,7 +444,7 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         HPillButton(
-                            text = "Bakiyeyi Ayarla",
+                            text = stringResource(R.string.btn_set_balance),
                             onClick = {
                                 val amount = CurrencyUtils.parseTurkishCurrency(updateAmountInput)
                                 if (amount != null) {
@@ -452,7 +455,7 @@ fun HomeScreen(
                         )
 
                         HPillButton(
-                            text = "Ekle",
+                            text = stringResource(R.string.btn_add_amount),
                             onClick = {
                                 val amount = CurrencyUtils.parseTurkishCurrency(updateAmountInput)
                                 if (amount != null) {

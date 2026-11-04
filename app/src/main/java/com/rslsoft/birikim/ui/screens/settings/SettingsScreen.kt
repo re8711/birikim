@@ -3,12 +3,12 @@ package com.rslsoft.birikim.ui.screens.settings
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.Fingerprint
+import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.VisibilityOff
@@ -17,8 +17,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.rslsoft.birikim.R
 import com.rslsoft.birikim.ui.components.*
 import com.rslsoft.birikim.ui.theme.BirikimTheme
 
@@ -48,7 +50,7 @@ fun SettingsScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Ayarlar",
+                        text = stringResource(R.string.settings_screen_title),
                         style = BirikimTheme.typography.titleLarge,
                         color = BirikimTheme.colors.textPrimary
                     )
@@ -56,8 +58,8 @@ fun SettingsScreen(
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(
-                            imageVector = Icons.Outlined.ArrowBack,
-                            contentDescription = "Geri",
+                            imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                            contentDescription = stringResource(R.string.btn_cancel),
                             tint = BirikimTheme.colors.textPrimary
                         )
                     }
@@ -90,7 +92,7 @@ fun SettingsScreen(
                             tint = BirikimTheme.colors.primary
                         )
                         Text(
-                            text = "Tema Modu",
+                            text = stringResource(R.string.theme_mode_title),
                             style = BirikimTheme.typography.cardTitle,
                             color = BirikimTheme.colors.textPrimary
                         )
@@ -103,9 +105,9 @@ fun SettingsScreen(
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         val themes = listOf(
-                            "SYSTEM" to "Otomatik",
-                            "LIGHT" to "Açık",
-                            "DARK" to "Koyu"
+                            "SYSTEM" to stringResource(R.string.theme_system),
+                            "LIGHT" to stringResource(R.string.theme_light),
+                            "DARK" to stringResource(R.string.theme_dark)
                         )
 
                         themes.forEach { (mode, label) ->
@@ -113,6 +115,52 @@ fun SettingsScreen(
                             HPillButton(
                                 text = label,
                                 onClick = { viewModel.setThemeMode(mode) },
+                                backgroundColor = if (isSelected) BirikimTheme.colors.primary else BirikimTheme.colors.background,
+                                textColor = if (isSelected) Color.White else BirikimTheme.colors.textPrimary,
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+                    }
+                }
+            }
+
+            // Language Section
+            item {
+                HCard(modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Language,
+                            contentDescription = null,
+                            tint = BirikimTheme.colors.primary
+                        )
+                        Text(
+                            text = stringResource(R.string.sec_language),
+                            style = BirikimTheme.typography.cardTitle,
+                            color = BirikimTheme.colors.textPrimary
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        val languages = listOf(
+                            "system" to stringResource(R.string.lang_system),
+                            "tr" to stringResource(R.string.lang_tr),
+                            "en" to stringResource(R.string.lang_en),
+                            "de" to stringResource(R.string.lang_de)
+                        )
+
+                        languages.forEach { (lang, label) ->
+                            val isSelected = uiState.appLanguage == lang
+                            HPillButton(
+                                text = label,
+                                onClick = { viewModel.setAppLanguage(lang) },
                                 backgroundColor = if (isSelected) BirikimTheme.colors.primary else BirikimTheme.colors.background,
                                 textColor = if (isSelected) Color.White else BirikimTheme.colors.textPrimary,
                                 modifier = Modifier.weight(1f)
@@ -142,12 +190,12 @@ fun SettingsScreen(
                             )
                             Column {
                                 Text(
-                                    text = "Bakiyeyi Varsayılan Gizle",
+                                    text = stringResource(R.string.hide_balance_default),
                                     style = BirikimTheme.typography.body.copy(fontWeight = FontWeight.Medium),
                                     color = BirikimTheme.colors.textPrimary
                                 )
                                 Text(
-                                    text = "Uygulama açılışında bakiye gizli olsun",
+                                    text = stringResource(R.string.hide_balance_default_desc),
                                     style = BirikimTheme.typography.label,
                                     color = BirikimTheme.colors.textSecondary
                                 )
@@ -181,12 +229,12 @@ fun SettingsScreen(
                             )
                             Column {
                                 Text(
-                                    text = "Biyometrik Kilit",
+                                    text = stringResource(R.string.biometric_lock),
                                     style = BirikimTheme.typography.body.copy(fontWeight = FontWeight.Medium),
                                     color = BirikimTheme.colors.textPrimary
                                 )
                                 Text(
-                                    text = "Açılışta parmak izi / yüz doğrulama iste",
+                                    text = stringResource(R.string.biometric_desc),
                                     style = BirikimTheme.typography.label,
                                     color = BirikimTheme.colors.textSecondary
                                 )
@@ -220,12 +268,12 @@ fun SettingsScreen(
                             )
                             Column {
                                 Text(
-                                    text = "Hatırlatıcı Bildirimleri",
+                                    text = stringResource(R.string.payment_reminders),
                                     style = BirikimTheme.typography.body.copy(fontWeight = FontWeight.Medium),
                                     color = BirikimTheme.colors.textPrimary
                                 )
                                 Text(
-                                    text = "Yaklaşan fatura ve abonelik bildirimi al",
+                                    text = stringResource(R.string.payment_reminders_desc),
                                     style = BirikimTheme.typography.label,
                                     color = BirikimTheme.colors.textSecondary
                                 )
@@ -244,7 +292,7 @@ fun SettingsScreen(
             item {
                 HCard(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = "Veri Yönetimi",
+                        text = stringResource(R.string.sec_data_mgmt),
                         style = BirikimTheme.typography.cardTitle,
                         color = BirikimTheme.colors.textPrimary
                     )
@@ -267,12 +315,12 @@ fun SettingsScreen(
                         )
                         Column {
                             Text(
-                                text = "Verileri Dışa Aktar (CSV)",
+                                text = stringResource(R.string.export_csv),
                                 style = BirikimTheme.typography.body.copy(fontWeight = FontWeight.Medium),
                                 color = BirikimTheme.colors.textPrimary
                             )
                             Text(
-                                text = "İşlem geçmişini CSV dosyası olarak indir",
+                                text = stringResource(R.string.export_csv_desc),
                                 style = BirikimTheme.typography.label,
                                 color = BirikimTheme.colors.textSecondary
                             )
@@ -299,12 +347,12 @@ fun SettingsScreen(
                         )
                         Column {
                             Text(
-                                text = "Tüm Verileri Sil",
+                                text = stringResource(R.string.clear_all_data),
                                 style = BirikimTheme.typography.body.copy(fontWeight = FontWeight.Medium),
                                 color = BirikimTheme.colors.expense
                             )
                             Text(
-                                text = "İşlemler, hedefler ve ayarlar sıfırlanır",
+                                text = stringResource(R.string.clear_data_desc),
                                 style = BirikimTheme.typography.label,
                                 color = BirikimTheme.colors.textSecondary
                             )
@@ -318,11 +366,11 @@ fun SettingsScreen(
         if (showClearDataDialog) {
             AlertDialog(
                 onDismissRequest = { showClearDataDialog = false },
-                title = { Text("Tüm Verileri Sil?", style = BirikimTheme.typography.titleLarge) },
-                text = { Text("Bu işlem geri alınamaz. Tüm kayıtların ve bakiyen silinecek.") },
+                title = { Text(stringResource(R.string.clear_data_confirm_title), style = BirikimTheme.typography.titleLarge) },
+                text = { Text(stringResource(R.string.clear_data_confirm_msg)) },
                 confirmButton = {
                     HPillButton(
-                        text = "Sil",
+                        text = stringResource(R.string.btn_delete_all),
                         onClick = {
                             viewModel.clearAllData()
                             showClearDataDialog = false
@@ -332,7 +380,7 @@ fun SettingsScreen(
                 },
                 dismissButton = {
                     HPillButton(
-                        text = "İptal",
+                        text = stringResource(R.string.btn_cancel),
                         onClick = { showClearDataDialog = false },
                         backgroundColor = BirikimTheme.colors.background,
                         textColor = BirikimTheme.colors.textPrimary
