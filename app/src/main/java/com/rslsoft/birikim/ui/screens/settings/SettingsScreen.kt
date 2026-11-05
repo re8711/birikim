@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.Fingerprint
@@ -407,6 +408,44 @@ fun SettingsScreen(
                             )
                             Text(
                                 text = stringResource(R.string.privacy_policy_desc),
+                                style = BirikimTheme.typography.label,
+                                color = BirikimTheme.colors.textSecondary
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+                    HorizontalDivider(color = BirikimTheme.colors.divider)
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    // Other Apps on Google Play
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                val intent = Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("https://play.google.com/store/apps/dev?id=8997304842714985973")
+                                )
+                                context.startActivity(intent)
+                            }
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Apps,
+                            contentDescription = null,
+                            tint = BirikimTheme.colors.primary
+                        )
+                        Column {
+                            Text(
+                                text = stringResource(R.string.other_apps_title),
+                                style = BirikimTheme.typography.body.copy(fontWeight = FontWeight.Medium),
+                                color = BirikimTheme.colors.textPrimary
+                            )
+                            Text(
+                                text = stringResource(R.string.other_apps_desc),
                                 style = BirikimTheme.typography.label,
                                 color = BirikimTheme.colors.textSecondary
                             )
