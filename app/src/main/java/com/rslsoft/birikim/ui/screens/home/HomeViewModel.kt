@@ -123,7 +123,27 @@ class HomeViewModel @Inject constructor(
         balance: Long,
         isYearly: Boolean
     ) {
-        val transactionData = transactions.map { t ->
+        val now = java.util.Calendar.getInstance()
+        val currentYear = now.get(java.util.Calendar.YEAR)
+        val currentMonth = now.get(java.util.Calendar.MONTH)
+
+        // Tek seferlik işlemleri içinde bulunulan ay/yıl ile filtrele
+        val relevantTransactions = transactions.filter { t ->
+            if (t.recurrence == Recurrence.ONCE) {
+                val cal = java.util.Calendar.getInstance().apply { timeInMillis = t.createdAt }
+                val txnYear = cal.get(java.util.Calendar.YEAR)
+                val txnMonth = cal.get(java.util.Calendar.MONTH)
+                if (isYearly) {
+                    txnYear == currentYear
+                } else {
+                    txnYear == currentYear && txnMonth == currentMonth
+                }
+            } else {
+                true
+            }
+        }
+
+        val transactionData = relevantTransactions.map { t ->
             FinanceCalculations.TransactionData(
                 amountKurus = t.amount,
                 type = when (t.type) {
@@ -149,11 +169,11 @@ class HomeViewModel @Inject constructor(
 
         // Kategori bazlı gider dağılımı
         val categoryMap = categories.associateBy { it.id }
-        val expensesByCategory = transactions
+        val expensesByCategory = relevantTransactions
             .filter { it.type == TransactionType.EXPENSE }
             .groupBy { it.categoryId }
             .map { (catId, txns) ->
-                val cat = categoryMap[catId] ?: Category(name = "Diğer", iconKey = "more_horiz", colorHex = "#78909C")
+                val cat = categoryMap[catId] ?: Category(id = 11, name = "Diğer", iconKey = "more_horiz", colorHex = "#78909C")
                 val totalForCategory = txns.sumOf { t ->
                     val rd = when (t.recurrence) {
                         Recurrence.ONCE -> FinanceCalculations.TransactionRecurrence.ONCE
