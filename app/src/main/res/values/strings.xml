@@ -170,6 +170,12 @@
     <string name="clear_data_confirm_msg">This action cannot be undone. All your records and balance will be deleted.</string>
     <string name="btn_delete_all">Delete All</string>
 
+    <!-- About & Legal -->
+    <string name="sec_about_legal">About &amp; Legal</string>
+    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="privacy_policy_desc">Read our data protection and privacy policy</string>
+    <string name="app_version">Version %1$s</string>
+
     <!-- Biometric Lock -->
     <string name="biometric_prompt_title">Unlock Birikim</string>
     <string name="biometric_prompt_subtitle">Verify your identity to proceed</string>

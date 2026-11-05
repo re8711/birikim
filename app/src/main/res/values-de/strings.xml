@@ -170,6 +170,12 @@
     <string name="clear_data_confirm_msg">Dies kann nicht rückgängig gemacht werden. Alle Einträge und der Kontostand werden gelöscht.</string>
     <string name="btn_delete_all">Alles löschen</string>
 
+    <!-- About & Legal -->
+    <string name="sec_about_legal">Über &amp; Rechtliches</string>
+    <string name="privacy_policy_title">Datenschutzerklärung</string>
+    <string name="privacy_policy_desc">Lesen Sie unsere Datenschutzbestimmungen</string>
+    <string name="app_version">Version %1$s</string>
+
     <!-- Biometric Lock -->
     <string name="biometric_prompt_title">Birikim entsperren</string>
     <string name="biometric_prompt_subtitle">Bestätigen Sie Ihre Identität, um fortzufahren</string>

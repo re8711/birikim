@@ -170,6 +170,12 @@
     <string name="clear_data_confirm_msg">Bu işlem geri alınamaz. Tüm kayıtların ve bakiyen silinecek.</string>
     <string name="btn_delete_all">Tümünü Sil</string>
 
+    <!-- About & Legal -->
+    <string name="sec_about_legal">Hakkında &amp; Yasal</string>
+    <string name="privacy_policy_title">Gizlilik Politikası</string>
+    <string name="privacy_policy_desc">Veri koruma ve gizlilik politikasını okuyun</string>
+    <string name="app_version">Sürüm %1$s</string>
+
     <!-- Biometric Lock -->
     <string name="biometric_prompt_title">Birikim\'e Giriş</string>
     <string name="biometric_prompt_subtitle">Kimliğinizi doğrulayın</string>

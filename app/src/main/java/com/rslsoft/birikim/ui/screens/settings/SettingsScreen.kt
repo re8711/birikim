@@ -1,5 +1,7 @@
 package com.rslsoft.birikim.ui.screens.settings
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,15 +10,18 @@ import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Download
 import androidx.compose.material.icons.outlined.Fingerprint
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.material.icons.outlined.Security
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -353,6 +358,86 @@ fun SettingsScreen(
                             )
                             Text(
                                 text = stringResource(R.string.clear_data_desc),
+                                style = BirikimTheme.typography.label,
+                                color = BirikimTheme.colors.textSecondary
+                            )
+                        }
+                    }
+                }
+            }
+
+            // About & Legal
+            item {
+                HCard(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        text = stringResource(R.string.sec_about_legal),
+                        style = BirikimTheme.typography.cardTitle,
+                        color = BirikimTheme.colors.textPrimary
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    val context = LocalContext.current
+
+                    // Privacy Policy Website
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                val intent = Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("https://re8711.github.io/birikim/")
+                                )
+                                context.startActivity(intent)
+                            }
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Security,
+                            contentDescription = null,
+                            tint = BirikimTheme.colors.primary
+                        )
+                        Column {
+                            Text(
+                                text = stringResource(R.string.privacy_policy_title),
+                                style = BirikimTheme.typography.body.copy(fontWeight = FontWeight.Medium),
+                                color = BirikimTheme.colors.textPrimary
+                            )
+                            Text(
+                                text = stringResource(R.string.privacy_policy_desc),
+                                style = BirikimTheme.typography.label,
+                                color = BirikimTheme.colors.textSecondary
+                            )
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+                    HorizontalDivider(color = BirikimTheme.colors.divider)
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    // App Version
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = null,
+                            tint = BirikimTheme.colors.textSecondary
+                        )
+                        Column {
+                            Text(
+                                text = "Birikim",
+                                style = BirikimTheme.typography.body.copy(fontWeight = FontWeight.Medium),
+                                color = BirikimTheme.colors.textPrimary
+                            )
+                            Text(
+                                text = stringResource(R.string.app_version, "1.0.0"),
                                 style = BirikimTheme.typography.label,
                                 color = BirikimTheme.colors.textSecondary
                             )
